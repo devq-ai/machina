@@ -230,6 +230,7 @@ class Settings(BaseSettings):
         env_file_encoding = "utf-8"
         case_sensitive = True
         validate_assignment = True
+        extra = "ignore"  # Allow extra environment variables
 
 
 # Global settings instance

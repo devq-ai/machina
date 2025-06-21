@@ -43,6 +43,7 @@ from app.core.exceptions import (
     create_http_exception,
     handle_exception,
 )
+from app.core.database import init_db, close_db, check_db_health
 
 
 @asynccontextmanager
@@ -65,7 +66,7 @@ async def lifespan(app: FastAPI):
         logfire.info("Configuration validation successful")
 
         # Initialize database connections
-        # Note: Database initialization will be implemented in subtask 1.2
+        await init_db()
         logfire.info("Database connections initialized")
 
         # Initialize Redis cache
@@ -88,6 +89,7 @@ async def lifespan(app: FastAPI):
 
     try:
         # Close database connections
+        await close_db()
         logfire.info("Database connections closed")
 
         # Close Redis connections
@@ -272,10 +274,10 @@ async def general_exception_handler(request: Request, exc: Exception):
 @app.get("/health", tags=["Health"])
 async def health_check() -> Dict[str, Any]:
     """
-    Basic health check endpoint.
+    Comprehensive health check endpoint with database status.
 
     Returns:
-        Dict containing health status and basic service information
+        Dict containing health status and service information
     """
     with logfire.span("Health check"):
         health_data = {
@@ -285,6 +287,17 @@ async def health_check() -> Dict[str, Any]:
             "environment": settings.ENVIRONMENT,
             "mcp_enabled": settings.MCP_TOOLS_ENABLED,
         }
+
+        # Check database health
+        try:
+            db_health = await check_db_health()
+            health_data["database"] = db_health
+        except Exception as e:
+            health_data["database"] = {
+                "status": "unhealthy",
+                "error": str(e)
+            }
+            health_data["status"] = "degraded"
 
         logfire.info("Health check requested", **health_data)
         return health_data

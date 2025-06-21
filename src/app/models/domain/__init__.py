@@ -12,6 +12,18 @@ Models:
 - configuration.py: Service configuration and settings model
 """
 
-from .registry_item import RegistryItem
+from .registry_item import (
+    RegistryItem,
+    ServiceBuildType,
+    ServiceProtocol,
+    ServiceStatus,
+    ServicePriority
+)
 
-__all__ = ["RegistryItem"]
+__all__ = [
+    "RegistryItem",
+    "ServiceBuildType",
+    "ServiceProtocol",
+    "ServiceStatus",
+    "ServicePriority"
+]

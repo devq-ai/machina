@@ -11,5 +11,6 @@ Components:
 """
 
 from .base import BaseModel
+from .domain.registry_item import RegistryItem
 
-__all__ = ["BaseModel"]
+__all__ = ["BaseModel", "RegistryItem"]

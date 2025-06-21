@@ -13,5 +13,6 @@ Components:
 """
 
 from .base import BaseRepository
+from .registry_item import RegistryItemRepository
 
-__all__ = ["BaseRepository"]
+__all__ = ["BaseRepository", "RegistryItemRepository"]
