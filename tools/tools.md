@@ -1,983 +1,121 @@
-rule_1: all(type=zed-mcp_server) == (enabled: true) && (required=true)
-rule_2: all(type=anthropic_core_tool) == (enabled=true) && (required=true)
-
-required_tools: audit_logging, code_execution, extended_thinking, file_access, memory, parallel_tool, usage_monitoring, web_search, crawl4ai-mcp, browser-tools-context-server, mcp-server-buildkite, mcp-server-context7, mcp-server-github, mcp-server-sequential-thinking, zed-slack-mcp, puppeteer-mcp, zed-mcp-server-shopify-dev, zed-resend-mcp-server, zed-rover-mcp-server, byterover-zed-extension, zed-polar-context-server, ptolemies-mcp-server, task-master-mcp-server
-
-tool: audit_logging
-description: comprehensive logging and audit trail system for ai interactions and tool usage
-dev_needed: true
-enabled: true
-last_checked: 2025-06-18 04:50
-purpose: development
-required: true
-online: false
-type: anthropic_core_tool
-url: https://docs.anthropic.com/en/docs/agents-and-tools/tool-use/overview
-
-tool: code_execution
-description: native python code execution in secure sandboxed environment with persistent memory
-dev_needed: false
-enabled: true
-last_checked: 2025-06-18 04:50
-purpose: development
-required: true
-online: false
-type: anthropic_core_tool
-url: https://docs.anthropic.com/en/docs/agents-and-tools/tool-use/overview
-
-tool: extended_thinking
-description: deep reasoning mode with enhanced problem-solving and multi-step analysis
-dev_needed: false
-enabled: true
-last_checked: 2025-06-18 04:50
-purpose: development
-required: true
-online: false
-type: anthropic_core_tool
-url: https://docs.anthropic.com/en/docs/agents-and-tools/tool-use/overview
-
-tool: file_access
-description: local file system operations including read, write, and directory navigation
-dev_needed: false
-enabled: true
-last_checked: 2025-06-18 04:50
-purpose: development
-required: true
-online: false
-type: anthropic_core_tool
-url: https://docs.anthropic.com/en/docs/agents-and-tools/tool-use/overview
-
-tool: memory
-description: persistent context and memory management across conversation sessions
-dev_needed: false
-enabled: true
-last_checked: 2025-06-18 04:50
-purpose: development
-required: true
-online: false
-type: anthropic_core_tool
-url: https://docs.anthropic.com/en/docs/agents-and-tools/tool-use/overview
-
-tool: parallel_tool
-description: concurrent execution of multiple tools simultaneously for enhanced efficiency
-dev_needed: false
-enabled: true
-last_checked: 2025-06-18 04:50
-purpose: development
-required: true
-online: false
-type: anthropic_core_tool
-url: https://docs.anthropic.com/en/docs/agents-and-tools/tool-use/overview
-
-tool: usage_monitoring
-description: real-time monitoring of api usage, token consumption, and performance metrics
-dev_needed: false
-enabled: true
-last_checked: 2025-06-18 04:50
-purpose: development
-required: true
-online: false
-type: anthropic_core_tool
-url: https://docs.anthropic.com/en/docs/agents-and-tools/tool-use/overview
-
-tool: web_search
-description: real-time web search capabilities during extended thinking mode
-dev_needed: false
-enabled: true
-last_checked: 2025-06-18 04:50
-purpose: development
-required: true
-online: false
-type: anthropic_core_tool
-url: https://docs.anthropic.com/en/docs/agents-and-tools/tool-use/overview
-
-tool: batch_process
-description: process multiple operations in batches with error handling and retry logic
-dev_needed: false
-enabled: true
-last_checked: 2025-06-18 04:50
-purpose: development
-required: false
-online: false
-type: pydantic-ai_core_tool
-url: https://github.com/pydantic/pydantic-ai/blob/main/docs/tools.md
-
-tool: create_report
-description: generate comprehensive reports with charts, tables, and formatted output
-dev_needed: false
-enabled: true
-last_checked: 2025-06-18 04:50
-purpose: knowledge
-required: false
-online: false
-type: pydantic-ai_core_tool
-url: https://github.com/pydantic/pydantic-ai/blob/main/docs/tools.md
-
-tool: doc_gen
-description: automated documentation generation with markdown, html, and pdf support
-dev_needed: false
-enabled: true
-last_checked: 2025-06-18 04:50
-purpose: knowledge
-required: false
-online: false
-type: pydantic-ai_core_tool
-url: https://github.com/pydantic/pydantic-ai/blob/main/docs/tools.md
-
-tool: expensive_calc
-description: high-performance computational operations with resource optimization
-dev_needed: false
-enabled: true
-last_checked: 2025-06-18 04:50
-purpose: development
-required: false
-online: false
-type: pydantic-ai_core_tool
-url: https://github.com/pydantic/pydantic-ai/blob/main/docs/tools.md
-
-tool: external_api
-description: secure integration with external apis including authentication and rate limiting
-dev_needed: false
-enabled: true
-last_checked: 2025-06-18 04:50
-purpose: development
-required: false
-online: false
-type: pydantic-ai_core_tool
-url: https://github.com/pydantic/pydantic-ai/blob/main/docs/tools.md
-
-tool: generate_chart
-description: data visualization tool supporting multiple chart types and export formats
-dev_needed: false
-enabled: true
-last_checked: 2025-06-18 04:50
-purpose: anaysis
-required: false
-online: false
-type: pydantic-ai_core_tool
-url: https://github.com/pydantic/pydantic-ai/blob/main/docs/tools.md
-
-tool: test_gen
-description: automated test case generation for code validation and quality assurance
-dev_needed: false
-enabled: true
-last_checked: 2025-06-18 04:50
-purpose: development
-required: false
-online: false
-type: pydantic-ai_core_tool
-url: https://github.com/pydantic/pydantic-ai/blob/main/docs/tools.md
-
-tool: output
-description: structured output formatting with validation and schema enforcement
-dev_needed: false
-enabled: true
-last_checked: 2025-06-18 04:50
-purpose: development
-required: false
-online: false
-type: pydantic-ai_core_tool
-url: https://github.com/pydantic/pydantic-ai/blob/main/docs/tools.md
-
-tool: plan_gen
-description: strategic planning and roadmap generation with milestone tracking
-dev_needed: false
-enabled: true
-last_checked: 2025-06-18 04:50
-purpose: development
-required: false
-online: false
-type: pydantic-ai_core_tool
-url: https://github.com/pydantic/pydantic-ai/blob/main/docs/tools.md
-
-tool: plan_run
-description: execute generated plans with progress monitoring and adaptive scheduling
-dev_needed: false
-enabled: true
-last_checked: 2025-06-18 04:50
-purpose: development
-required: false
-online: false
-type: pydantic-ai_core_tool
-url: https://github.com/pydantic/pydantic-ai/blob/main/docs/tools.md
-
-tool: process_data
-description: etl operations with data transformation, validation, and quality checks
-dev_needed: false
-enabled: true
-last_checked: 2025-06-18 04:50
-purpose: development
-required: false
-online: false
-type: pydantic-ai_core_tool
-url: https://github.com/pydantic/pydantic-ai/blob/main/docs/tools.md
-
-tool: test_run
-description: execute test suites with coverage reporting and result analysis
-dev_needed: false
-enabled: true
-last_checked: 2025-06-18 04:50
-purpose: development
-required: false
-online: false
-type: pydantic-ai_core_tool
-url: https://github.com/pydantic/pydantic-ai/blob/main/docs/tools.md
-
-tool: viz_playbook
-description: interactive visualization playbooks for data exploration and analysis
-dev_needed: false
-enabled: true
-last_checked: 2025-06-18 04:50
-purpose: development
-required: false
-online: false
-type: pydantic-ai_core_tool
-url: https://github.com/pydantic/pydantic-ai/blob/main/docs/tools.md
-
-tool: web_search
-description: enhanced web search with result filtering, ranking, and content extraction
-dev_needed: false
-enabled: true
-last_checked: 2025-06-18 04:50
-purpose: development
-required: false
-online: false
-type: pydantic-ai_core_tool
-url: https://github.com/pydantic/pydantic-ai/blob/main/docs/tools.md
-
-tool: agentql-mcp
-description: web scraping and browser automation using natural language queries
-dev_needed: true
-enabled: true
-last_checked: 2025-06-18 04:50
-purpose: data
-required: false
-online: false
-type: mcp_server
-url: https://github.com/tinyfish-io/agentql-mcp
-
-tool: bayes-mcp
-description: bayesian inference and statistical analysis with mcmc sampling capabilities
-dev_needed: true
-enabled: true
-last_checked: 2025-06-18 04:50
-purpose: anaysis
-required: false
-online: false
-type: mcp_server
-url: https://github.com/devq-ai/bayes
-
-tool: browser-tools
-description: complete browser automation toolkit with screenshot and interaction capabilities
-dev_needed: true
-enabled: true
-last_checked: 2025-06-18 04:50
-purpose: knowledge
-required: false
-online: false
-type: mcp_server
-url: https://github.com/agentdeskai/browser-tools-mcp
-
-tool: calendar-mcp
-description: google calendar integration for event management and scheduling
-dev_needed: true
-enabled: true
-last_checked: 2025-06-18 04:50
-purpose: productivity
-required: false
-online: false
-type: mcp_server
-url: https://github.com/zawad99/google-calendar-mcp-server
-
-tool: context7-mcp
-description: advanced context management and semantic search with vector embeddings
-dev_needed: true
-enabled: true
-last_checked: 2025-06-18 04:50
-purpose: development
-required: false
-online: false
-type: mcp_server
-url: https://github.com/upstash/context7
-
-tool: crawl4ai-mcp
-description: web crawling and rag capabilities for ai agents and ai coding assistants
-dev_needed: true
-enabled: false
-last_checked: 2025-06-18 04:50
-purpose: knowledge
-required: true
-online: false
-type: mcp_server
-url: https://github.com/coleam00/mcp-crawl4ai-rag
-
-tool: github-mcp
-description: github api integration for repository management, issues, and pull requests
-dev_needed: true
-enabled: true
-last_checked: 2025-06-18 04:50
-purpose: development
-required: false
-online: false
-type: mcp_server
-url: https://github.com/github/github-mcp-server
-
-tool: jupyter-mcp
-description: jupyter notebook execution and data science workflow management
-dev_needed: true
-enabled: true
-last_checked: 2025-06-18 04:50
-purpose: anaysis
-required: false
-online: false
-type: mcp_server
-url: https://github.com/datalayer/jupyter-mcp-server
-
-tool: magic-mcp
-description: ai-powered code generation and transformation utilities
-dev_needed: true
-enabled: true
-last_checked: 2025-06-18 04:50
-purpose: development
-required: false
-online: false
-type: mcp_server
-url: https://github.com/21st-dev/magic-mcp
-
-tool: memory-mcp
-description: persistent memory management with contextual recall and learning
-dev_needed: true
-enabled: true
-last_checked: 2025-06-18 04:50
-purpose: development
-required: false
-online: false
-type: mcp_server
-url: https://github.com/mem0ai/mem0-mcp
-
-tool: registry-mcp
-description: official mcp server registry with discovery and installation tools
-dev_needed: true
-enabled: true
-last_checked: 2025-06-18 04:50
-purpose: development
-required: false
-online: false
-type: mcp_server
-url: https://github.com/modelcontextprotocol/registry
-
-tool: shadcn-ui-mcp-server
-description: shadcn/ui component library integration for react development
-dev_needed: true
-enabled: true
-last_checked: 2025-06-18 04:50
-purpose: development
-required: false
-online: false
-type: mcp_server
-url: https://github.com/ymadd/shadcn-ui-mcp-server
-
-tool: solver-mzn-mcp
-description: minizinc constraint satisfaction and optimization solver
-dev_needed: true
-enabled: true
-last_checked: 2025-06-18 04:50
-purpose: anaysis
-required: false
-online: false
-type: mcp_server
-url: https://github.com/szeider/mcp-solver
-
-tool: solver-pysat-mcp
-description: pysat boolean satisfiability problem solver with advanced algorithms
-dev_needed: true
-enabled: true
-last_checked: 2025-06-18 04:50
-purpose: anaysis
-required: false
-online: false
-type: mcp_server
-url: https://github.com/szeider/mcp-solver
-
-tool: solver-z3-mcp
-description: z3 theorem prover for formal verification and constraint solving
-dev_needed: true
-enabled: true
-last_checked: 2025-06-18 04:50
-purpose: anaysis
-required: false
-online: false
-type: mcp_server
-url: https://github.com/szeider/mcp-solver
-
-tool: stripe-mcp
-description: stripe payment processing integration with transaction management
-dev_needed: true
-enabled: true
-last_checked: 2025-06-18 04:50
-purpose: financial
-required: false
-online: false
-type: mcp_server
-url: https://github.com/stripe/agent-toolkit
-
-tool: surrealdb-mcp
-description: surrealdb multi-model database integration with graph capabilities
-dev_needed: true
-enabled: true
-last_checked: 2025-06-18 04:50
-purpose: database
-required: false
-online: false
-type: mcp_server
-url: https://github.com/nsxdavid/surrealdb-mcp-server
-
-tool: calculate_math
-description: advanced mathematical computations with symbolic math and numerical analysis
-dev_needed: false
-enabled: true
-last_checked: 2025-06-18 04:50
-purpose: anaysis
-required: false
-online: false
-type: pydantic-ai_core_tool
-url: https://ai.pydantic.dev/api/tools/
-
-tool: evals
-description: comprehensive evaluation framework for model performance and accuracy testing
-dev_needed: false
-enabled: true
-last_checked: 2025-06-18 04:50
-purpose: anaysis
-required: false
-online: false
-type: pydantic-ai_core_tool
-url: https://ai.pydantic.dev/api/tools/
-
-tool: execute_query
-description: database query execution with connection pooling and result validation
-dev_needed: false
-enabled: true
-last_checked: 2025-06-18 04:50
-purpose: database
-required: false
-online: false
-type: pydantic-ai_core_tool
-url: https://ai.pydantic.dev/api/tools/
-
-tool: format_text
-description: advanced text formatting with markdown, html, and custom template support
-dev_needed: false
-enabled: true
-last_checked: 2025-06-18 04:50
-purpose: knowledge
-required: false
-online: false
-type: pydantic-ai_core_tool
-url: https://ai.pydantic.dev/api/tools/
-
-tool: get_timestamp
-description: timezone-aware timestamp generation with multiple format options
-dev_needed: false
-enabled: true
-last_checked: 2025-06-18 04:50
-purpose: infrastructure
-required: false
-online: false
-type: pydantic-ai_core_tool
-url: https://ai.pydantic.dev/api/tools/
-
-tool: get_user_data
-description: secure user data retrieval with privacy compliance and access controls
-dev_needed: false
-enabled: true
-last_checked: 2025-06-18 04:50
-purpose: development
-required: false
-online: false
-type: pydantic-ai_core_tool
-url: https://ai.pydantic.dev/api/tools/
-
-tool: logfire-mcp
-description: integrated observability and logging with structured monitoring
-dev_needed: false
-enabled: true
-last_checked: 2025-06-18 04:50
-purpose: development
-required: false
-online: false
-type: mcp_server
-url: https://ai.pydantic.dev/api/tools/
-
-tool: mcp-run-python
-description: secure python code execution in isolated environments with dependency management
-dev_needed: false
-enabled: true
-last_checked: 2025-06-18 04:50
-purpose: development
-required: false
-online: false
-type: pydantic-ai_core_tool
-url: https://ai.pydantic.dev/api/tools/
-
-tool: message_chat_history
-description: conversation history management with search and context preservation
-dev_needed: false
-enabled: true
-last_checked: 2025-06-18 04:50
-purpose: development
-required: false
-online: false
-type: pydantic-ai_core_tool
-url: https://ai.pydantic.dev/api/tools/
-
-tool: multimodal_input
-description: process text, images, audio, and video inputs with unified interface
-dev_needed: false
-enabled: true
-last_checked: 2025-06-18 04:50
-purpose: development
-required: false
-online: false
-type: pydantic-ai_core_tool
-url: https://ai.pydantic.dev/api/tools/
-
-tool: unit_test
-description: automated unit test generation and execution with coverage analysis
-dev_needed: false
-enabled: true
-last_checked: 2025-06-18 04:50
-purpose: infrastructure
-required: false
-online: false
-type: pydantic-ai_core_tool
-url: https://ai.pydantic.dev/api/tools/
-
-tool: browser-tools-context-server
-description: browser automation within zed editor with context-aware interactions
-dev_needed: false
-enabled: true
-last_checked: 2025-06-18 04:50
-purpose: development
-required: true
-online: false
-type: zed-mcp_server
-url: https://github.com/miragen1349/browser-tools-context-server
-
-tool: mcp-server-buildkite
-description: buildkite ci/cd integration for pipeline management and build monitoring
-dev_needed: false
-enabled: true
-last_checked: 2025-06-18 04:50
-purpose: infrastructure
-required: true
-online: false
-type: zed-mcp_server
-url: https://github.com/mcncl/zed-mcp-server-buildkite
-
-tool: mcp-server-context7
-description: context7 semantic search integration for enhanced code understanding
-dev_needed: false
-enabled: true
-last_checked: 2025-06-18 04:50
-purpose: development
-required: true
-online: false
-type: zed-mcp_server
-url: https://github.com/akbxr/zed-mcp-server-context7
-
-tool: mcp-server-github
-description: github integration with repository browsing and code management
-dev_needed: false
-enabled: true
-last_checked: 2025-06-18 04:50
-purpose: infrastructure
-required: true
-online: false
-type: zed-mcp_server
-url: https://github.com/loamstudios/zed-mcp-server-github
-
-tool: mcp-server-sequential-thinking
-description: sequential reasoning capabilities for complex problem-solving workflows
-dev_needed: false
-enabled: true
-last_checked: 2025-06-18 04:50
-purpose: infrastructure
-required: true
-online: false
-type: zed-mcp_server
-url: https://github.com/loamstudios/zed-mcp-server-sequential-thinking
-
-tool: zed-slack-mcp
-description: enhanced slack integration with message threading and file sharing
-dev_needed: false
-enabled: true
-last_checked: 2025-06-18 04:50
-purpose: productivity
-required: true
-online: false
-type: zed-mcp_server
-url: https://github.com/semioz/zed-slack-mcp
-
-tool: bigquery-mcp
-description: google bigquery integration for large-scale data analytics
-dev_needed: true
-enabled: true
-last_checked: 2025-06-18 04:50
-purpose: database
-required: false
-online: false
-type: mcp_server
-url: https://github.com/lucashild/mcp-server-bigquery
-
-tool: databricks-mcp
-description: databricks platform integration for big data processing
-dev_needed: true
-enabled: true
-last_checked: 2025-06-18 04:50
-purpose: database
-required: false
-online: false
-type: mcp_server
-url: https://github.com/jordineil/mcp-databricks-server
-
-tool: esignatures-mcp
-description: electronic signature workflow management
-dev_needed: true
-enabled: true
-last_checked: 2025-06-18 04:50
-purpose: financial
-required: false
-online: false
-type: mcp_server
-url: https://github.com/esignaturescom/mcp-server-esignatures
-
-tool: financial-mcp
-description: financial data analysis and market research tools
-dev_needed: true
-enabled: true
-last_checked: 2025-06-18 04:50
-purpose: financial
-required: false
-online: false
-type: mcp_server
-url: https://github.com/financial-datasets/mcp-server
-
-tool: gcp-mcp
-description: google cloud platform integration and resource management
-dev_needed: true
-enabled: true
-last_checked: 2025-06-18 04:50
-purpose: productivity
-required: false
-online: false
-type: mcp_server
-url: https://github.com/eniayomi/gcp-mcp
-
-tool: gmail-mcp
-description: gmail integration for email automation and management
-dev_needed: true
-enabled: true
-last_checked: 2025-06-18 04:50
-purpose: productivity
-required: false
-online: false
-type: mcp_server
-url: https://github.com/ykuchiki/gmail-mcp
-
-tool: markdownify-mcp
-description: html to markdown conversion with formatting preservation
-dev_needed: true
-enabled: true
-last_checked: 2025-06-18 04:50
-purpose: productivity
-required: false
-online: false
-type: mcp_server
-url: https://github.com/zcaceres/markdownify-mcp
-
-tool: paypal-mcp
-description: paypal payment processing and transaction management
-dev_needed: true
-enabled: true
-last_checked: 2025-06-18 04:50
-purpose: financial
-required: false
-online: false
-type: mcp_server
-url: https://developer.paypal.com/tools/mcp-server
-
-tool: puppeteer-mcp
-description: headless browser automation with puppeteer
-dev_needed: true
-enabled: true
-last_checked: 2025-06-18 04:50
-purpose: knowledge
-required: true
-online: false
-type: mcp_server
-url: https://www.npmjs.com/package/@modelcontextprotocol/server-puppetee
-
-tool: redis-mcp
-description: redis cache and data store integration
-dev_needed: true
-enabled: true
-last_checked: 2025-06-18 04:50
-purpose: database
-required: false
-online: false
-type: mcp_server
-url: https://github.com/modelcontextprotocol/servers/redis
-
-tool: scholarly-mcp
-description: academic research and scholarly article access
-dev_needed: true
-enabled: true
-last_checked: 2025-06-18 04:50
-purpose: data
-required: false
-online: false
-type: mcp_server
-url: https://github.com/adityak74/mcp-scholarly
-
-tool: slack-mcp
-description: basic slack integration for messaging
-dev_needed: true
-enabled: true
-last_checked: 2025-06-18 04:50
-purpose: productivity
-required: false
-online: false
-type: mcp_server
-url: https://github.com/modelcontextprotocol/servers/slack
-
-tool: snowflake-mcp
-description: snowflake data warehouse integration
-dev_needed: true
-enabled: true
-last_checked: 2025-06-18 04:50
-purpose: database
-required: false
-online: false
-type: mcp_server
-url: https://github.com/isaacwasserman/mcp-snowflake-server
-
-tool: sqlite-mcp
-description: sqlite database operations and queries
-dev_needed: true
-enabled: true
-last_checked: 2025-06-18 04:50
-purpose: database
-required: false
-online: false
-type: mcp_server
-url: https://github.com/modelcontextprotocol/servers/sqlite
-
-tool: typescript-mcp
-description: the official typescript sdk for model context protocol servers and clients
-dev_needed: true
-enabled: true
-last_checked: 2025-06-18 04:50
-purpose: development
-required: false
-online: false
-type: mcp_server
-url: https://github.com/modelcontextprotocol/typescript-sdk
-
-tool: wikidata-mcp
-description: wikidata api for knowledge base integration and queries
-dev_needed: true
-enabled: true
-last_checked: 2025-06-18 04:50
-purpose: data
-required: false
-online: false
-type: mcp_server
-url: https://github.com/zzaebok/mcp-wikidata
-
-tool: xero-mcp-server
-description: xero accounting software integration
-dev_needed: true
-enabled: true
-last_checked: 2025-06-18 04:50
-purpose: financial
-required: false
-online: false
-type: mcp_server
-url: https://github.com/xeroapi/xero-mcp-server
-
-tool: zed-mcp-server-shopify-dev
-description: shopify.dev mcp server
-dev_needed: true
-enabled: true
-last_checked: 2025-06-18 04:50
-purpose: development
-required: true
-online: false
-type: zed-mcp_server
-url: https://github.com/thebeyondgroup/zed-mcp-server-shopify-dev
-
-tool: shopify-dev-mcp-server
-description: shopify.dev mcp server
-dev_needed: true
-enabled: true
-last_checked: 2025-06-18 04:50
-purpose: financial
-required: false
-online: false
-type: mcp_server
-url: https://github.com/shopify/dev-mcp
-
-tool: zed-resend-mcp-server
-description: reach humans and deliver transactional and marketing emails at scale
-dev_needed: false
-enabled: true
-last_checked: 2025-06-18 04:50
-purpose: development
-required: true
-online: false
-type: zed-mcp_server
-url: https://github.com/danilo-leal/zed-resend-mcp-server
-
-tool: zed-rover-mcp-server
-description: the code reliability platform for fast-moving teams
-dev_needed: false
-enabled: true
-last_checked: 2025-06-18 04:50
-purpose: development
-required: true
-online: false
-type: zed-mcp_server
-url: https://github.com/rover-app/zed-extension
-
-tool: byterover-zed-extension
-description: a self-improving, shared memory layer that remembers your ai agent's coding experiences
-dev_needed: false
-enabled: true
-last_checked: 2025-06-18 04:50
-purpose: development
-required: true
-online: false
-type: zed-mcp_server
-url: https://github.com/campfirein/byterover-zed-extension
-
-tool: zed-polar-context-server
-description: the modern way to sell your saas and digital products
-dev_needed: false
-enabled: true
-last_checked: 2025-06-18 04:50
-purpose: financial
-required: true
-online: false
-type: zed-mcp_server
-url: https://github.com/polarsource/zed-polar-context-server
-
-tool: darwin-mcp
-description: darwin is a comprehensive genetic algorithm optimization platform and mcp-server
-dev_needed: true
-enabled: true
-last_checked: 2025-06-18 04:50
-purpose: anaysis
-required: false
-online: false
-type: mcp_server
-url: https://github.com/devq-ai/darwin/
-
-tool: brightdata-mcp
-description: enabling agents and apps to access, discover and extract web data in real-time
-dev_needed: true
-enabled: true
-last_checked: 2025-06-18 04:50
-purpose: data
-required: false
-online: false
-type: mcp_server
-url: https://github.com/brightdata/brightdata-mcp
-
-tool: ptolemies-mcp-server
-description: a temporal knowledge graph for agentic systems
-dev_needed: true
-enabled: true
-last_checked: 2025-06-18 04:50
-purpose: knowledge
-required: true
-online: false
-type: mcp_server
-url: https://github.com/devq-ai/ptolemies
-
-tool: pulumi-mcp-server
-description: build deploy packages, updates, and stack via pulumi
-dev_needed: true
-enabled: true
-last_checked: 2025-06-18 04:50
-purpose: infrastructure
-required: false
-online: false
-type: mcp_server
-url: https://github.com/pulumi/mcp-server
-
-tool: mcp-server-kalshi
-description: a mcp server to interact with kalshi prediction markets
-dev_needed: true
-enabled: true
-last_checked: 2025-06-18 04:50
-purpose: financial
-required: false
-online: false
-type: mcp_server
-url: https://github.com/9crusher/mcp-server-kalshi
-
-tool: task-master-mcp-server
-description: mcp lets you run task master directly from your editor
-dev_needed: false
-enabled: true
-last_checked: 2025-06-18 04:50
-purpose: development
-required: true
-online: false
-type: mcp_server
-url: https://github.com/eyaltoledano/claude-task-master/
-
-tool: mcp-server-docker
-description: an mcp server for managing docker with natural language
-dev_needed: true
-enabled: true
-last_checked: 2025-06-18 04:50
-purpose: development
-required: false
-online: false
-type: mcp_server
-url: https://github.com/ckreiling/mcp-server-docker
-
-tool: databutton-mcp
-description: databutton agent deploys your app to aws and gcp
-dev_needed: true
-enabled: true
-last_checked: 2025-06-18 04:50
-purpose: development
-required: false
-online: false
-type: mcp_server
-url: https://github.com/databutton/databutton-mcp
-
-tool: imcp
-description: a macos app that provides an mcp server to your messages, contacts, calendar events
-dev_needed: true
-enabled: true
-last_checked: 2025-06-18 04:50
-purpose: productivity
-required: false
-online: false
-type: mcp_server
-url: https://github.com/loopwork-ai/iMCP
-
-tool: upstash-mcp
-description: use any MCP Client to interact with your Upstash account
-dev_needed: true
-enabled: false
-last_checked: 2025-06-18 04:50
-purpose: development
-required: false
-online: false
-type: mcp_server
-url: https://github.com/upstash/mcp-server
+# DevQ.ai MCP Server Development Status Validation
+
+## Summary
+
+**Date**: June 21, 2025
+**Total MCP Servers Planned**: 46
+**Status**: 8 servers have basic stub implementations, 1 server (task-master) has partial implementation
+
+## Current Implementation Status
+
+### ❌ **INCOMPLETE IMPLEMENTATIONS (8 servers)**
+
+All servers in `/devqai/mcp/mcp-servers/` are **basic stubs only** - not production ready:
+
+1. **context7-mcp** - ❌ **STUB ONLY** (64 lines, basic status tool only)
+
+   - Location: `/devqai/mcp/mcp-servers/context7-mcp/`
+   - Status: Template implementation with only status check functionality
+   - Missing: All actual context management and semantic search features
+
+2. **crawl4ai-mcp** - ❌ **STUB ONLY** (64 lines, basic status tool only)
+
+   - Location: `/devqai/mcp/mcp-servers/crawl4ai-mcp/`
+   - Status: Template implementation with only status check functionality
+   - Missing: All web crawling and RAG capabilities
+
+3. **magic-mcp** - ❌ **STUB ONLY** (64 lines, basic status tool only)
+
+   - Location: `/devqai/mcp/mcp-servers/magic-mcp/`
+   - Status: Template implementation with only status check functionality
+   - Missing: All AI-powered code generation features
+
+4. **registry-mcp** - ❌ **STUB ONLY** (64 lines, basic status tool only)
+
+   - Location: `/devqai/mcp/mcp-servers/registry-mcp/`
+   - Status: Template implementation with only status check functionality
+   - Missing: All registry discovery and installation tools
+
+5. **shadcn-ui-mcp-server** - ❌ **STUB ONLY** (64 lines, basic status tool only)
+
+   - Location: `/devqai/mcp/mcp-servers/shadcn-ui-mcp-server/`
+   - Status: Template implementation with only status check functionality
+   - Missing: All shadcn/ui component library integration
+
+6. **solver-pysat-mcp** - ❌ **STUB ONLY** (64 lines, basic status tool only)
+
+   - Location: `/devqai/mcp/mcp-servers/solver-pysat-mcp/`
+   - Status: Template implementation with only status check functionality
+   - Missing: All Boolean satisfiability solving capabilities
+
+7. **solver-z3-mcp** - ❌ **STUB ONLY** (64 lines, basic status tool only)
+
+   - Location: `/devqai/mcp/mcp-servers/solver-z3-mcp/`
+   - Status: Template implementation with only status check functionality
+   - Missing: All Z3 theorem proving capabilities
+
+8. **surrealdb-mcp** - ❌ **STUB ONLY** (64 lines, basic status tool only)
+   - Location: `/devqai/mcp/mcp-servers/surrealdb-mcp/`
+   - Status: Template implementation with only status check functionality
+   - Missing: All SurrealDB multi-model database integration
+
+### 🏗️ **PARTIAL IMPLEMENTATION (1 server)**
+
+9. **task-master-mcp-server** - 🏗️ **PARTIAL** (36 lines + src/ directory)
+   - Location: `/devqai/taskmaster-ai/claude-task-master/mcp-server/`
+   - Status: Has actual implementation structure with src/ directory
+   - Implementation Level: ~20% complete (has structure but needs full feature implementation)
+
+## Revised Priority Assessment
+
+Based on this validation, **NONE of the 9 servers are production-ready**. The previous assessment was incorrect.
+
+### **CORRECTED DEVELOPMENT PRIORITY**
+
+#### **🚨 IMMEDIATE PRIORITY - BUILD FROM SCRATCH (9 servers)**
+
+All servers need complete implementation, not just completion:
+
+1. **task-master-mcp-server** - 🏗️ Complete existing partial implementation
+2. **crawl4ai-mcp** - ❌ Build complete web crawling functionality
+3. **context7-mcp** - ❌ Build complete context management system
+4. **surrealdb-mcp** - ❌ Build complete database integration
+5. **magic-mcp** - ❌ Build complete AI code generation
+6. **registry-mcp** - ❌ Build complete registry management
+7. **shadcn-ui-mcp-server** - ❌ Build complete UI component integration
+8. **solver-pysat-mcp** - ❌ Build complete SAT solver integration
+9. **solver-z3-mcp** - ❌ Build complete theorem prover integration
+
+#### **🎯 NEXT PRIORITY - NEW DEVELOPMENT (37 servers)**
+
+10. **ptolemies-mcp-server** - ❌ **REQUIRED** (knowledge management)
+11. **puppeteer-mcp** - 🔄 **REQUIRED** (integrate external)
+12. **bayes-mcp** - 🏗️ Convert existing project
+13. **darwin-mcp** - 🏗️ Convert existing project
+    ... [remaining 33 servers as previously outlined]
+
+## Key Findings
+
+1. **Reality Check**: DevQ.ai has **0 fully functional MCP servers** (0% completion rate)
+2. **Stub Template**: All 8 servers use identical 64-line template with only basic status functionality
+3. **Missing Features**: No actual business logic, tool implementations, or integrations
+4. **TaskMaster Exception**: Only task-master has partial implementation structure
+5. **Development Effort**: Requires full development effort for all 9 "existing" servers
+
+## Immediate Action Required
+
+1. **Complete task-master-mcp-server** (highest priority - already started)
+2. **Implement crawl4ai-mcp** (marked as "Required" in categorization)
+3. **Build ptolemies-mcp-server** (the only other "Required" server)
+4. **Develop remaining 6 stub servers** based on business priority
+
+## Estimated Development Timeline
+
+- **Week 1-2**: Complete task-master-mcp-server
+- **Week 3-4**: Build crawl4ai-mcp (Required)
+- **Week 5-6**: Build ptolemies-mcp-server (Required)
+- **Week 7-8**: Build context7-mcp and surrealdb-mcp (high value)
+- **Week 9-12**: Complete remaining 4 stub servers
+- **Week 13+**: Begin new server development (bayes, darwin, external integrations)
+
+**Total Effort**: ~12 weeks to complete the 9 "existing" servers properly.

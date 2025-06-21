@@ -1,0 +1,242 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls:*)",
+      "Bash(source:*)",
+      "Bash(./verify-tools.sh:*)",
+      "Bash(./tools-verification.sh:*)",
+      "Bash(rm:*)",
+      "Bash(cp:*)",
+      "Bash(mv:*)",
+      "Bash(mkdir:*)",
+      "Bash(find:*)",
+      "Bash(grep:*)",
+      "Bash(chmod:*)",
+      "Bash(curl:*)",
+      "Bash(git init:*)",
+      "Bash(git config:*)",
+      "Bash(git branch:*)",
+      "Bash(git remote add:*)",
+      "Bash(git checkout:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(python3:*)",
+      "Bash(pip:*)",
+      "Bash(pip install:*)",
+      "Bash(pytest:*)",
+      "Bash(pytest tests/:*)",
+      "Bash(pytest --cov=src/:*)",
+      "Bash(black:*)",
+      "Bash(isort:*)",
+      "Bash(mypy:*)",
+      "Bash(flake8:*)",
+      "Bash(PYTHONPATH=src python3:*)",
+      "Bash(PYTHONPATH=/Users/dionedge/devqai python3:*)",
+      "Bash(uvicorn:*)",
+      "Bash(uvicorn main:app:*)",
+      "Bash(fastapi:*)",
+      "Bash(npx:*)",
+      "Bash(npx task-master-ai:*)",
+      "Bash(npx dart-mcp-server:*)",
+      "Bash(task-master:*)",
+      "Bash(surreal:*)",
+      "Bash(cypher-shell:*)",
+      "Bash(redis-cli:*)",
+      "Bash(docker:*)",
+      "Bash(docker-compose:*)",
+      "Bash(node:*)",
+      "Bash(npm:*)",
+      "Bash(yarn:*)",
+      "Bash(zed:*)",
+      "Bash(code:*)",
+      "Bash(cat:*)",
+      "Bash(head:*)",
+      "Bash(tail:*)",
+      "Bash(echo:*)",
+      "Bash(export:*)",
+      "Bash(env:*)",
+      "Bash(which:*)",
+      "Bash(whereis:*)",
+      "Bash(ps:*)",
+      "Bash(kill:*)",
+      "Bash(pkill:*)",
+      "Bash(pgrep:*)",
+      "Bash(lsof:*)",
+      "Bash(netstat:*)",
+      "Bash(ss:*)",
+      "Bash(systemctl:*)",
+      "Bash(service:*)",
+      "Bash(brew:*)",
+      "Bash(apt:*)",
+      "Bash(apt-get:*)",
+      "Bash(wget:*)",
+      "Bash(tar:*)",
+      "Bash(zip:*)",
+      "Bash(unzip:*)",
+      "Bash(tree:*)",
+      "Bash(du:*)",
+      "Bash(df:*)",
+      "Bash(free:*)",
+      "Bash(top:*)",
+      "Bash(htop:*)",
+      "Bash(pwd:*)",
+      "Bash(whoami:*)",
+      "Bash(date:*)",
+      "Bash(uptime:*)",
+      "Bash(history:*)",
+      "Bash(alias:*)",
+      "Bash(unalias:*)",
+      "Bash(type:*)",
+      "Bash(help:*)",
+      "Bash(man:*)",
+      "Bash(info:*)",
+      "Bash(apropos:*)",
+      "Bash(whatis:*)",
+      "Bash(./.claude/launch-orchestrator.sh:*)",
+      "Bash(./.claude/monitor-orchestration.sh:*)",
+      "Bash(./.claude/setup-orchestrator.sh:*)",
+      "Bash(python .claude/orchestrator.py:*)",
+      "Bash(python3 .claude/orchestrator.py:*)",
+      "Bash(ls .claude/:*)",
+      "Bash(ls .claude/commands/:*)",
+      "Bash(cat .claude/:*)",
+      "Bash(cat .claude/commands/:*)",
+      "Bash(mkdir -p output:*)",
+      "Bash(mkdir -p .claude:*)",
+      "Bash(find output:*)",
+      "Bash(find .claude:*)",
+      "Bash(tail -f logs:*)",
+      "Bash(tail -f output:*)",
+      "Bash(chmod +x .claude:*)"
+    ],
+    "deny": [
+      "Bash(rm -rf /:*)",
+      "Bash(rm -rf ~:*)",
+      "Bash(rm -rf *:*)",
+      "Bash(sudo rm:*)",
+      "Bash(sudo dd:*)",
+      "Bash(sudo mkfs:*)",
+      "Bash(sudo fdisk:*)",
+      "Bash(sudo cfdisk:*)",
+      "Bash(sudo parted:*)",
+      "Bash(sudo mount:*)",
+      "Bash(sudo umount:*)",
+      "Bash(format:*)",
+      "Bash(del /f /s /q:*)"
+    ]
+  },
+  "mcpServers": {
+    "taskmaster-ai": {
+      "command": "npx",
+      "args": ["-y", "--package=task-master-ai", "task-master-ai"],
+      "env": {
+        "ANTHROPIC_API_KEY": "${ANTHROPIC_API_KEY}",
+        "MODEL": "claude-sonnet-4-20250514",
+        "MAX_TOKENS": "64000",
+        "TEMPERATURE": "0.2",
+        "DEFAULT_SUBTASKS": "5",
+        "DEFAULT_PRIORITY": "medium",
+        "DEBUG": "false",
+        "LOG_LEVEL": "info",
+        "PROJECT_NAME": "DevQ.ai Multi-Agent Orchestration",
+        "PROJECT_VERSION": "1.0.0"
+      }
+    },
+    "context7": {
+      "command": "python",
+      "args": ["-m", "context7_mcp.server"],
+      "cwd": "/Users/dionedge/devqai/mcp/mcp-servers/context7-mcp",
+      "env": {
+        "UPSTASH_REDIS_REST_URL": "${UPSTASH_REDIS_REST_URL}",
+        "UPSTASH_REDIS_REST_TOKEN": "${UPSTASH_REDIS_REST_TOKEN}",
+        "PYTHONPATH": "/Users/dionedge/devqai:$PYTHONPATH"
+      }
+    },
+    "ptolemies": {
+      "command": "python",
+      "args": ["-m", "ptolemies.mcp.ptolemies_mcp"],
+      "cwd": "/Users/dionedge/devqai/ptolemies",
+      "env": {
+        "SURREALDB_URL": "ws://localhost:8000/rpc",
+        "SURREALDB_USERNAME": "root",
+        "SURREALDB_PASSWORD": "root",
+        "SURREALDB_NAMESPACE": "ptolemies",
+        "SURREALDB_DATABASE": "knowledge",
+        "OPENAI_API_KEY": "${OPENAI_API_KEY}",
+        "PYTHONPATH": "/Users/dionedge/devqai:$PYTHONPATH"
+      }
+    },
+    "bayes": {
+      "command": "python",
+      "args": ["-m", "bayes_mcp"],
+      "cwd": "/Users/dionedge/devqai/bayes",
+      "env": {
+        "PYTHONPATH": "/Users/dionedge/devqai:$PYTHONPATH"
+      }
+    },
+    "surrealdb": {
+      "command": "python",
+      "args": ["-m", "surrealdb_mcp.server"],
+      "cwd": "/Users/dionedge/devqai/mcp/mcp-servers/surrealdb-mcp",
+      "env": {
+        "SURREALDB_URL": "ws://localhost:8000/rpc",
+        "SURREALDB_USERNAME": "root",
+        "SURREALDB_PASSWORD": "root",
+        "PYTHONPATH": "/Users/dionedge/devqai:$PYTHONPATH"
+      }
+    },
+    "crawl4ai": {
+      "command": "python",
+      "args": ["-m", "crawl4ai_mcp.server"],
+      "cwd": "/Users/dionedge/devqai/mcp/mcp-servers/crawl4ai-mcp",
+      "env": {
+        "PYTHONPATH": "/Users/dionedge/devqai:$PYTHONPATH"
+      }
+    },
+    "filesystem": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "/Users/dionedge/devqai"
+      ]
+    },
+    "git": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-git"]
+    },
+    "fetch": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-fetch"]
+    },
+    "memory": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-memory"]
+    },
+    "sequentialthinking": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-sequentialthinking"]
+    },
+    "github": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-github"],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_PERSONAL_ACCESS_TOKEN}"
+      }
+    },
+    "orchestrator": {
+      "command": "python",
+      "args": ["-m", "claude_orchestrator.server"],
+      "cwd": "/Users/dionedge/devqai/.claude",
+      "env": {
+        "ANTHROPIC_API_KEY": "${ANTHROPIC_API_KEY}",
+        "LOGFIRE_TOKEN": "${LOGFIRE_TOKEN}",
+        "DEVQAI_ROOT": "/Users/dionedge/devqai",
+        "PYTHONPATH": "/Users/dionedge/devqai:$PYTHONPATH"
+      }
+    }
+  }
+}

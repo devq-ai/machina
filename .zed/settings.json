@@ -1,0 +1,314 @@
+{
+    "tab_size": 2,
+    "theme": "One Dark",
+    "buffer_font_family": "Ubuntu",
+    "buffer_font_size": 14,
+    "soft_wrap": "editor_width",
+    "formatter": {
+        "language_server": {
+            "name": "black"
+        }
+    },
+    "terminal": {
+        "shell": {
+            "program": "/bin/zsh"
+        },
+        "working_directory": "current_project_directory",
+        "env": {
+            "ZDOTDIR": "/Users/dionedge/devqai/devgen/.zed"
+        },
+        "font_family": "MesloLGS Nerd Font",        "font_size": 14,
+        "line_height": "comfortable"
+    },
+    "languages": {
+        "Python": {
+            "formatter": {
+                "external": {
+                    "command": "black",
+                    "arguments": ["--line-length", "88", "-"]
+                }
+            },
+            "format_on_save": "on",
+            "tab_size": 4,
+            "language_servers": ["pyright"]
+        },
+        "TypeScript": {
+            "formatter": "prettier",
+            "format_on_save": "on",
+            "tab_size": 2,
+            "language_servers": ["typescript-language-server"]
+        },
+        "JavaScript": {
+            "formatter": "prettier",
+            "format_on_save": "on",
+            "tab_size": 2,
+            "language_servers": ["typescript-language-server"]
+        },
+        "JSON": {
+            "formatter": "prettier",
+            "format_on_save": "on",
+            "tab_size": 2
+        },
+        "YAML": {
+            "formatter": "prettier",
+            "format_on_save": "on",
+            "tab_size": 2
+        },
+        "Markdown": {
+            "formatter": "prettier",
+            "format_on_save": "on",
+            "tab_size": 2
+        }
+    },
+    "lsp": {
+        "pyright": {
+            "settings": {
+                "python": {
+                    "analysis": {
+                        "typeCheckingMode": "basic",
+                        "autoSearchPaths": true,
+                        "extraPaths": [
+                            "/Users/dionedge/devqai",
+                            "/Users/dionedge/devqai/src",
+                            "/Users/dionedge/devqai/ptolemies",
+                            "/Users/dionedge/devqai/bayes",
+                            "/Users/dionedge/devqai/mcp/mcp-servers"
+                        ],
+                        "autoImportCompletions": true,
+                        "diagnosticMode": "workspace",
+                        "useLibraryCodeForTypes": true
+                    },
+                    "defaultInterpreterPath": "python3",
+                    "venvPath": "./venv"
+                }
+            }
+        },
+        "typescript-language-server": {
+            "settings": {
+                "typescript": {
+                    "suggest": {
+                        "autoImports": true,
+                        "includeCompletionsForModuleExports": true
+                    },
+                    "preferences": {
+                        "importModuleSpecifier": "relative"
+                    }
+                }
+            }
+        }
+    },
+    "git": {
+        "git_gutter": "tracked_files",
+        "inline_blame": {
+            "enabled": true,
+            "delay_ms": 1000
+        },
+        "git_status": true
+    },
+    "project_panel": {
+        "dock": "left",
+        "default_width": 260,
+        "file_icons": true,
+        "folder_icons": true
+    },
+    "outline_panel": {
+        "dock": "right",
+        "default_width": 200
+    },
+    "collaboration_panel": {
+        "dock": "left"
+    },
+    "file_types": {
+        "Dockerfile": ["Dockerfile*", "*.dockerfile"],
+        "YAML": ["*.yml", "*.yaml"],
+        "Shell Script": ["*.zsh", "*.bash", "*.sh"],
+        "Python": ["*.py", "*.pyi", "*.pyw"],
+        "FastAPI": ["main.py", "app.py", "**/api/**/*.py"],
+        "PyTest": ["test_*.py", "*_test.py", "**/tests/**/*.py"],
+        "TaskMaster": ["tasks.json", "*.taskmaster"],
+        "MCP Config": ["mcp-servers.json", "*.mcp.json"]
+    },
+    "auto_save": "on_focus_change",
+    "autosave": "off",
+    "vim_mode": false,
+    "cursor_blink": true,
+    "show_whitespaces": "selection",
+    "show_wrap_guides": true,
+    "wrap_guides": [88, 100],
+    "indent_guides": {
+        "enabled": true,
+        "line_width": 1,
+        "active_line_width": 2
+    },
+    "scrollbar": {
+        "show": "auto",
+        "git_diff": true,
+        "search_results": true,
+        "selected_symbol": true,
+        "diagnostics": "all"
+    },
+    "inlay_hints": {
+        "enabled": true,
+        "show_type_hints": true,
+        "show_parameter_hints": true,
+        "show_other_hints": true
+    },
+    "preview_tabs": {
+        "enabled": true,
+        "enable_preview_from_file_finder": true
+    },
+    "enable_language_server": true,
+    "show_completion_documentation": true,
+    "completion_documentation_secondary_query_debounce": 300,
+    "features": {
+        "copilot": false,
+        "inline_completion_provider": "none"
+    },
+    "assistant": {
+        "default_model": {
+            "provider": "anthropic",
+            "model": "claude-sonnet-4-20250514"
+        },
+        "version": "2",
+        "enabled": true
+    },
+    "tasks": {
+        "variables": {
+            "DEVQAI_ROOT": "/Users/dionedge/devqai",
+            "PYTEST_ARGS": "tests/ --cov=src/ --cov-report=html --cov-fail-under=90",
+            "FASTAPI_CMD": "uvicorn main:app --reload --host 0.0.0.0 --port 8000",
+            "LOGFIRE_CHECK": "python -c \"import logfire; print('✅ Logfire available')\"",
+            "TASKMASTER_CHECK": "npx task-master-ai --version"
+        }
+    },
+    "experimental.theme_overrides": {
+        "syntax": {
+            "keyword": {
+                "color": "#ff79c6",
+                "font_weight": 300
+            },
+            "string": {
+                "color": "#f1fa8c"
+            },
+            "function": {
+                "color": "#50fa7b"
+            },
+            "type": {
+                "color": "#8be9fd"
+            },
+            "comment": {
+                "color": "#6272a4",
+                "font_style": "italic"
+            }
+        }
+    },
+    "mcpServers": {
+        "taskmaster-ai": {
+            "command": "npx",
+            "args": ["-y", "--package=task-master-ai", "task-master-ai"],
+            "env": {
+                "ANTHROPIC_API_KEY": "${ANTHROPIC_API_KEY}",
+                "MODEL": "claude-sonnet-4-20250514",
+                "MAX_TOKENS": "64000",
+                "TEMPERATURE": "0.2",
+                "DEFAULT_SUBTASKS": "5",
+                "DEFAULT_PRIORITY": "medium",
+                "DEBUG": "false",
+                "LOG_LEVEL": "info",
+                "PROJECT_NAME": "DevQ.ai Project",
+                "PROJECT_VERSION": "1.0.0"
+            }
+        },
+        "context7": {
+            "command": "python",
+            "args": ["-m", "context7_mcp.server"],
+            "cwd": "/Users/dionedge/devqai/mcp/mcp-servers/context7-mcp",
+            "env": {
+                "UPSTASH_REDIS_REST_URL": "${UPSTASH_REDIS_REST_URL}",
+                "UPSTASH_REDIS_REST_TOKEN": "${UPSTASH_REDIS_REST_TOKEN}",
+                "PYTHONPATH": "/Users/dionedge/devqai:$PYTHONPATH"
+            }
+        },
+        "ptolemies": {
+            "command": "python",
+            "args": ["-m", "ptolemies.mcp.ptolemies_mcp"],
+            "cwd": "/Users/dionedge/devqai/ptolemies",
+            "env": {
+                "SURREALDB_URL": "ws://localhost:8000/rpc",
+                "SURREALDB_USERNAME": "root",
+                "SURREALDB_PASSWORD": "root",
+                "SURREALDB_NAMESPACE": "ptolemies",
+                "SURREALDB_DATABASE": "knowledge",
+                "OPENAI_API_KEY": "${OPENAI_API_KEY}",
+                "PYTHONPATH": "/Users/dionedge/devqai:$PYTHONPATH"
+            }
+        },
+        "bayes": {
+            "command": "python",
+            "args": ["-m", "bayes_mcp"],
+            "cwd": "/Users/dionedge/devqai/bayes",
+            "env": {
+                "PYTHONPATH": "/Users/dionedge/devqai:$PYTHONPATH"
+            }
+        },
+        "surrealdb": {
+            "command": "python",
+            "args": ["-m", "surrealdb_mcp.server"],
+            "cwd": "/Users/dionedge/devqai/mcp/mcp-servers/surrealdb-mcp",
+            "env": {
+                "SURREALDB_URL": "ws://localhost:8000/rpc",
+                "SURREALDB_USERNAME": "root",
+                "SURREALDB_PASSWORD": "root",
+                "PYTHONPATH": "/Users/dionedge/devqai:$PYTHONPATH"
+            }
+        },
+        "crawl4ai": {
+            "command": "python",
+            "args": ["-m", "crawl4ai_mcp.server"],
+            "cwd": "/Users/dionedge/devqai/mcp/mcp-servers/crawl4ai-mcp",
+            "env": {
+                "PYTHONPATH": "/Users/dionedge/devqai:$PYTHONPATH"
+            }
+        },
+        "solver-z3": {
+            "command": "python",
+            "args": ["-m", "solver_z3_mcp.server"],
+            "cwd": "/Users/dionedge/devqai/mcp/mcp-servers/solver-z3-mcp",
+            "env": {
+                "PYTHONPATH": "/Users/dionedge/devqai:$PYTHONPATH"
+            }
+        },
+        "solver-pysat": {
+            "command": "python",
+            "args": ["-m", "solver_pysat_mcp.server"],
+            "cwd": "/Users/dionedge/devqai/mcp/mcp-servers/solver-pysat-mcp",
+            "env": {
+                "PYTHONPATH": "/Users/dionedge/devqai:$PYTHONPATH"
+            }
+        },
+        "magic": {
+            "command": "python",
+            "args": ["-m", "magic_mcp.server"],
+            "cwd": "/Users/dionedge/devqai/mcp/mcp-servers/magic-mcp",
+            "env": {
+                "PYTHONPATH": "/Users/dionedge/devqai:$PYTHONPATH"
+            }
+        },
+        "shadcn-ui": {
+            "command": "python",
+            "args": ["-m", "shadcn_ui_mcp.server"],
+            "cwd": "/Users/dionedge/devqai/mcp/mcp-servers/shadcn-ui-mcp-server",
+            "env": {
+                "PYTHONPATH": "/Users/dionedge/devqai:$PYTHONPATH"
+            }
+        },
+        "registry": {
+            "command": "python",
+            "args": ["-m", "registry_mcp.server"],
+            "cwd": "/Users/dionedge/devqai/mcp/mcp-servers/registry-mcp",
+            "env": {
+                "PYTHONPATH": "/Users/dionedge/devqai:$PYTHONPATH"
+            }
+        }
+    }
+}
