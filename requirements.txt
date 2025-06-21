@@ -7,6 +7,10 @@ uvicorn[standard]>=0.24.0
 pydantic>=2.5.0
 pydantic-settings>=2.0.0
 
+# MCP Protocol Support
+mcp>=1.0.0
+fastmcp>=0.1.0
+
 # Logfire Observability (Required)
 logfire[fastapi]>=3.18.0
 
@@ -20,6 +24,11 @@ httpx>=0.25.0
 # Database Support
 sqlalchemy>=2.0.0
 alembic>=1.12.0
+asyncpg>=0.28.0
+
+# Cache and Messaging
+redis>=4.5.0
+aioredis>=2.0.0
 
 # Security
 python-jose[cryptography]>=3.3.0
