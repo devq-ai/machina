@@ -8,8 +8,7 @@ pydantic>=2.5.0
 pydantic-settings>=2.0.0
 
 # MCP Protocol Support
-mcp>=1.0.0
-fastmcp>=0.1.0
+mcp>=1.1.0
 
 # Logfire Observability (Required)
 logfire[fastapi]>=3.18.0

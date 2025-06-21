@@ -357,6 +357,27 @@ class MCPError(MachinaException):
         )
 
 
+class InitializationError(MachinaException):
+    """Exception raised when application initialization fails."""
+
+    def __init__(
+        self,
+        message: str,
+        component: Optional[str] = None,
+        **kwargs
+    ):
+        context = kwargs.get("context", {})
+        if component:
+            context["component"] = component
+
+        super().__init__(
+            message=message,
+            error_code="INITIALIZATION_ERROR",
+            context=context,
+            **kwargs
+        )
+
+
 # HTTP Status Code Mapping
 EXCEPTION_STATUS_MAP = {
     ValidationError: status.HTTP_422_UNPROCESSABLE_ENTITY,
@@ -370,6 +391,7 @@ EXCEPTION_STATUS_MAP = {
     ExternalServiceError: status.HTTP_502_BAD_GATEWAY,
     ConfigurationError: status.HTTP_500_INTERNAL_SERVER_ERROR,
     MCPError: status.HTTP_500_INTERNAL_SERVER_ERROR,
+    InitializationError: status.HTTP_500_INTERNAL_SERVER_ERROR,
     MachinaException: status.HTTP_500_INTERNAL_SERVER_ERROR,
 }
 

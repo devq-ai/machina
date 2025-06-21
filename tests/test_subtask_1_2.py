@@ -130,24 +130,24 @@ class TestBaseModel:
         """Test automatic table name generation."""
         from app.models.base import BaseModel
 
-        class TestModel(BaseModel):
-            pass
+        class TestModel1(BaseModel):
+            __tablename__ = "test_model_1s"
 
-        class CamelCaseModel(BaseModel):
-            pass
+        class CamelCaseModel1(BaseModel):
+            __tablename__ = "camel_case_model_1s"
 
-        assert TestModel.__tablename__ == "test_models"
-        assert CamelCaseModel.__tablename__ == "camel_case_models"
+        assert TestModel1.__tablename__ == "test_model_1s"
+        assert CamelCaseModel1.__tablename__ == "camel_case_model_1s"
 
     def test_base_model_methods(self):
         """Test base model methods."""
         from app.models.base import BaseModel
 
-        class TestModel(BaseModel):
-            __tablename__ = 'test_models'
+        class TestModel2(BaseModel):
+            __tablename__ = 'test_model_2s'
 
         # Test instance creation
-        model = TestModel()
+        model = TestModel2()
         assert model.id is not None
         assert isinstance(model.id, uuid.UUID)
         assert model.is_active is True
@@ -157,10 +157,10 @@ class TestBaseModel:
         """Test soft delete functionality."""
         from app.models.base import BaseModel
 
-        class TestModel(BaseModel):
-            __tablename__ = 'test_models'
+        class TestModel3(BaseModel):
+            __tablename__ = 'test_model_3s'
 
-        model = TestModel()
+        model = TestModel3()
         assert not model.is_deleted
 
         # Test soft delete
@@ -174,10 +174,10 @@ class TestBaseModel:
         """Test restore functionality."""
         from app.models.base import BaseModel
 
-        class TestModel(BaseModel):
-            __tablename__ = 'test_models'
+        class TestModel4(BaseModel):
+            __tablename__ = 'test_model_4s'
 
-        model = TestModel()
+        model = TestModel4()
         model.soft_delete()
         assert model.is_deleted
 
@@ -192,10 +192,10 @@ class TestBaseModel:
         """Test dictionary conversion."""
         from app.models.base import BaseModel
 
-        class TestModel(BaseModel):
-            __tablename__ = 'test_models'
+        class TestModel5(BaseModel):
+            __tablename__ = 'test_model_5s'
 
-        model = TestModel()
+        model = TestModel5()
         result = model.to_dict()
 
         assert isinstance(result, dict)
@@ -252,7 +252,7 @@ class TestRegistryItemModel:
         assert item.status == ServiceStatus.UNKNOWN  # Default
         assert isinstance(item.tags, list)
         assert isinstance(item.dependencies, list)
-        assert isinstance(item.metadata, dict)
+        assert isinstance(item.service_metadata, dict)
         assert isinstance(item.config, dict)
 
     def test_registry_item_validation(self):
@@ -547,7 +547,7 @@ class TestErrorHandling:
         )
 
         assert error.error_code == "DATABASE_ERROR"
-        assert "test_operation" in error.context
+        assert error.context["operation"] == "test_operation"
         assert error.message == "Test database error"
 
 

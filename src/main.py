@@ -7,7 +7,7 @@ support for both HTTP REST API and MCP (Model Context Protocol) interfaces.
 
 Features:
 - FastAPI application with automatic OpenAPI documentation
-- FastMCP integration for MCP protocol support
+- Redis cache and pub/sub integration
 - Logfire observability with comprehensive instrumentation
 - CORS middleware for cross-origin requests
 - Exception handling with custom error responses
@@ -17,18 +17,17 @@ Features:
 Components:
 1. FastAPI Foundation Framework
 2. Logfire Observability Integration
-3. MCP Protocol Support
-4. HTTP REST API Routes
+3. Database Integration (PostgreSQL)
+4. Redis Cache and Pub/Sub System
 5. Error Handling and Middleware
 """
 
 import os
 import sys
-from contextlib import asynccontextmanager
 from typing import Dict, Any
 
 import logfire
-from fastapi import FastAPI, Request, Response
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from fastapi.exceptions import RequestValidationError
@@ -43,65 +42,7 @@ from app.core.exceptions import (
     create_http_exception,
     handle_exception,
 )
-from app.core.database import init_db, close_db, check_db_health
-
-
-@asynccontextmanager
-async def lifespan(app: FastAPI):
-    """
-    Application lifespan manager for startup and shutdown events.
-
-    This function handles the initialization and cleanup of resources
-    during application startup and shutdown, including database connections,
-    cache initialization, and external service setup.
-    """
-    # Startup
-    logfire.info("Machina Registry Service starting up",
-                environment=settings.ENVIRONMENT,
-                version=settings.VERSION)
-
-    try:
-        # Validate configuration for current environment
-        validate_environment_config()
-        logfire.info("Configuration validation successful")
-
-        # Initialize database connections
-        await init_db()
-        logfire.info("Database connections initialized")
-
-        # Initialize Redis cache
-        # Note: Redis initialization will be implemented in subtask 1.3
-        logfire.info("Redis cache initialized")
-
-        # Initialize MCP server components
-        logfire.info("MCP server components initialized")
-
-        logfire.info("Machina Registry Service startup completed successfully")
-
-    except Exception as e:
-        logfire.error("Failed to start Machina Registry Service", error=str(e))
-        raise
-
-    yield
-
-    # Shutdown
-    logfire.info("Machina Registry Service shutting down")
-
-    try:
-        # Close database connections
-        await close_db()
-        logfire.info("Database connections closed")
-
-        # Close Redis connections
-        logfire.info("Redis connections closed")
-
-        # Cleanup MCP server components
-        logfire.info("MCP server components cleaned up")
-
-        logfire.info("Machina Registry Service shutdown completed")
-
-    except Exception as e:
-        logfire.error("Error during shutdown", error=str(e))
+from app.core.initialization import lifespan, get_application_health, is_application_ready
 
 
 def create_application() -> FastAPI:
@@ -115,7 +56,7 @@ def create_application() -> FastAPI:
     Returns:
         FastAPI: Configured application instance
     """
-    # Create FastAPI application
+    # Create FastAPI application with integrated lifecycle management
     app = FastAPI(
         title=settings.PROJECT_NAME,
         description="DevQ.ai MCP Registry & Management Platform - Unified MCP server registry, health monitoring, service discovery, and configuration management",
@@ -126,12 +67,15 @@ def create_application() -> FastAPI:
         redoc_url="/redoc" if settings.DEBUG else None,
     )
 
-    # Configure Logfire observability (optional for development)
+    # Configure Logfire observability
     try:
         if settings.LOGFIRE_TOKEN:
             logfire.configure(**settings.logfire_config)
             # Instrument FastAPI with Logfire
             logfire.instrument_fastapi(app, capture_headers=True)
+            # Instrument database and cache connections
+            logfire.instrument_sqlalchemy()
+            logfire.instrument_httpx()
             logfire.info("Logfire observability configured successfully")
         else:
             logfire.info("Logfire token not provided, running without observability")
@@ -148,10 +92,14 @@ def create_application() -> FastAPI:
             allow_headers=settings.CORS_ALLOW_HEADERS,
         )
 
-    # Add middleware for request/response logging
+    # Add middleware for request/response logging and performance monitoring
     @app.middleware("http")
     async def logging_middleware(request: Request, call_next):
         """Log all HTTP requests and responses for observability."""
+        import time
+
+        start_time = time.time()
+
         with logfire.span(
             "HTTP Request",
             method=request.method,
@@ -160,16 +108,22 @@ def create_application() -> FastAPI:
         ) as span:
             response = await call_next(request)
 
+            process_time = time.time() - start_time
+
             span.set_attribute("status_code", response.status_code)
+            span.set_attribute("process_time", process_time)
             span.set_attribute("response_size", response.headers.get("content-length", "unknown"))
 
+            # Add process time header
+            response.headers["X-Process-Time"] = str(process_time)
+
             # Log slow requests
-            if hasattr(span, "duration") and span.duration > 1000:  # > 1 second
+            if process_time > 1.0:  # > 1 second
                 logfire.warning(
                     "Slow request detected",
                     method=request.method,
                     url=str(request.url),
-                    duration_ms=span.duration,
+                    duration_ms=process_time * 1000,
                     status_code=response.status_code
                 )
 
@@ -270,37 +224,70 @@ async def general_exception_handler(request: Request, exc: Exception):
     )
 
 
-# Basic health check endpoint
+# Health check endpoints
 @app.get("/health", tags=["Health"])
 async def health_check() -> Dict[str, Any]:
     """
-    Comprehensive health check endpoint with database status.
+    Comprehensive health check endpoint with all service status.
 
     Returns:
         Dict containing health status and service information
     """
     with logfire.span("Health check"):
-        health_data = {
-            "status": "healthy",
-            "service": settings.PROJECT_NAME,
-            "version": settings.VERSION,
-            "environment": settings.ENVIRONMENT,
-            "mcp_enabled": settings.MCP_TOOLS_ENABLED,
-        }
-
-        # Check database health
         try:
-            db_health = await check_db_health()
-            health_data["database"] = db_health
-        except Exception as e:
-            health_data["database"] = {
-                "status": "unhealthy",
-                "error": str(e)
-            }
-            health_data["status"] = "degraded"
+            health_data = await get_application_health()
 
-        logfire.info("Health check requested", **health_data)
-        return health_data
+            logfire.info(
+                "Health check completed",
+                overall_status=health_data["overall_status"],
+                healthy_services=health_data["summary"]["healthy_services"],
+                unhealthy_services=health_data["summary"]["unhealthy_services"]
+            )
+
+            return health_data
+
+        except Exception as e:
+            logfire.error("Health check failed", error=str(e))
+            return {
+                "overall_status": "error",
+                "error": str(e),
+                "service": settings.PROJECT_NAME,
+                "version": settings.VERSION
+            }
+
+
+@app.get("/health/ready", tags=["Health"])
+async def readiness_check() -> Dict[str, Any]:
+    """
+    Readiness check endpoint for Kubernetes/Docker deployments.
+
+    Returns:
+        Dict indicating if the service is ready to accept traffic
+    """
+    ready = is_application_ready()
+
+    return {
+        "ready": ready,
+        "service": settings.PROJECT_NAME,
+        "version": settings.VERSION,
+        "status": "ready" if ready else "not_ready"
+    }
+
+
+@app.get("/health/live", tags=["Health"])
+async def liveness_check() -> Dict[str, Any]:
+    """
+    Liveness check endpoint for Kubernetes/Docker deployments.
+
+    Returns:
+        Dict indicating if the service is alive
+    """
+    return {
+        "alive": True,
+        "service": settings.PROJECT_NAME,
+        "version": settings.VERSION,
+        "uptime": "operational"
+    }
 
 
 @app.get("/", tags=["Root"])
@@ -316,24 +303,81 @@ async def root() -> Dict[str, Any]:
         "version": settings.VERSION,
         "description": "DevQ.ai MCP Registry & Management Platform",
         "environment": settings.ENVIRONMENT,
-        "docs_url": "/docs" if settings.DEBUG else None,
-        "health_url": "/health",
-        "api_prefix": settings.API_V1_STR,
+        "features": {
+            "mcp_enabled": settings.MCP_TOOLS_ENABLED,
+            "cache_enabled": True,
+            "observability_enabled": bool(settings.LOGFIRE_TOKEN),
+            "debug_mode": settings.DEBUG
+        },
+        "endpoints": {
+            "docs": "/docs" if settings.DEBUG else None,
+            "health": "/health",
+            "ready": "/health/ready",
+            "live": "/health/live",
+            "api": settings.API_V1_STR,
+            "tasks": f"{settings.API_V1_STR}/tasks",
+            "task_stats": f"{settings.API_V1_STR}/tasks/statistics",
+            "task_enums": f"{settings.API_V1_STR}/tasks/enums"
+        },
     }
 
 
-# Include API routers
-from app.api.http.routes import router as http_router
-app.include_router(http_router, prefix=settings.API_V1_STR)
+# Cache management endpoints for development/debugging
+if settings.DEBUG:
+    @app.post("/debug/cache/clear", tags=["Debug"])
+    async def clear_cache():
+        """Clear all cache entries (DEBUG ONLY)."""
+        try:
+            from app.core.cache import get_cache_service
+            cache_service = await get_cache_service()
 
-# MCP protocol support (will be implemented in future subtasks)
-# Note: MCP server integration will be added in future subtasks
-# from app.api.mcp.handlers import register_handlers
-# register_handlers(app)
+            # Clear cache statistics
+            await cache_service.clear_stats()
+
+            logfire.info("Cache cleared via debug endpoint")
+            return {"message": "Cache cleared successfully"}
+
+        except Exception as e:
+            logfire.error("Failed to clear cache", error=str(e))
+            return {"error": str(e)}
+
+    @app.get("/debug/cache/stats", tags=["Debug"])
+    async def get_cache_stats():
+        """Get cache statistics (DEBUG ONLY)."""
+        try:
+            from app.services.cache_service import get_cache_utilities
+            cache_utils = await get_cache_utilities()
+
+            metrics = await cache_utils.get_cache_metrics()
+            return metrics
+
+        except Exception as e:
+            logfire.error("Failed to get cache stats", error=str(e))
+            return {"error": str(e)}
+
+
+# Include API routers
+from app.api.v1.taskmaster import router as taskmaster_router
+app.include_router(taskmaster_router, prefix=settings.API_V1_STR)
+
+# MCP protocol support - Register MCP handlers
+if settings.MCP_TOOLS_ENABLED:
+    from app.mcp.handlers import register_mcp_handlers
+    mcp_handlers = register_mcp_handlers(app)
+    logfire.info("MCP protocol support enabled and handlers registered")
+else:
+    logfire.info("MCP protocol support disabled")
 
 
 if __name__ == "__main__":
     import uvicorn
+
+    # Validate configuration before starting
+    try:
+        validate_environment_config()
+    except Exception as e:
+        logfire.error("Configuration validation failed", error=str(e))
+        sys.exit(1)
 
     # Configure uvicorn logging to work with Logfire
     log_config = uvicorn.config.LOGGING_CONFIG
@@ -344,7 +388,9 @@ if __name__ == "__main__":
         host=settings.HOST,
         port=settings.PORT,
         reload=settings.RELOAD,
-        environment=settings.ENVIRONMENT
+        environment=settings.ENVIRONMENT,
+        project_name=settings.PROJECT_NAME,
+        version=settings.VERSION
     )
 
     uvicorn.run(

@@ -7,14 +7,10 @@ APIs, and provide the core functionality for MCP server registry management.
 
 Components:
 - cache_service.py: Redis-based caching service for performance optimization
-- notification_service.py: Pub/sub notification system for real-time updates
-- registry_service.py: Core registry management and service discovery logic
-- health_service.py: Service health monitoring and status management
-- config_service.py: Configuration management and settings persistence
+- Additional services will be added in future subtasks
 """
 
-from .cache_service import CacheService
-from .notification_service import NotificationService
-from .registry_service import RegistryService
+from .cache_service import CacheUtilities
+from .taskmaster_service import TaskMasterService
 
-__all__ = ["CacheService", "NotificationService", "RegistryService"]
+__all__ = ["CacheUtilities", "TaskMasterService"]
