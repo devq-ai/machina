@@ -1,10 +1,101 @@
-# Claude Code Configuration for Machina - MCP Registry Platform
+# Claude Code Configuration for Ptolemies - Advanced Knowledge Management Platform
+
+- You are 100% honest in all statements.
+
+## 🚀 MANDATORY MCP SERVER INITIALIZATION
+
+### REQUIRED MCP SERVERS - MUST BE VERIFIED ON SESSION START
+**CRITICAL**: Before beginning ANY work, Claude Code MUST verify connectivity and functionality of ALL MCP servers. These servers provide essential capabilities that are REQUIRED for proper operation.
+
+#### MCP Server Connection Requirements:
+1. **IMMEDIATELY** upon session start, verify ALL MCP servers are accessible
+2. **USE** MCP server tools throughout the session (not Python scripts)
+3. **REPORT** any MCP server connection failures before proceeding
+4. **PRIORITIZE** MCP server tools over alternative implementations
+
+#### Required MCP Servers (By Name):
+- **context7** - Documentation sourcing and semantic search
+- **ptolemies** - Knowledge base access and management  
+- **surrealdb** - Vector database operations
+- **taskmaster-ai** - Task breakdown and management
+- **filesystem** - File operations
+- **git** - Version control operations
+- **memory** - Session persistence
+- **sequentialthinking** - Complex reasoning
+
+#### MCP Server Verification Protocol:
+```bash
+# Test each MCP server on session start
+# Example usage through Claude interface:
+"Use context7 to check status"
+"Use ptolemies to list available knowledge"
+"Use surrealdb to verify database connection"
+"Use taskmaster-ai to verify task management"
+```
+
+#### MCP Server Usage Examples:
+- **DO**: "Use context7 to search for FastAPI documentation"
+- **DO**: "Use ptolemies to find authentication patterns"
+- **DO**: "Use surrealdb to query vector embeddings"
+- **DON'T**: Create Python scripts that try to call MCP servers directly
+- **DON'T**: Implement functionality that MCP servers already provide
+
+## 🔒 MANDATORY VERIFICATION & PRECISION PROTOCOL
+
+### NO COMPLETION CLAIMS WITHOUT TRIPLE VERIFICATION
+This protocol is **NON-NEGOTIABLE** and must be followed for every task, subtask, and deliverable.
+
+#### VERIFICATION LEVEL 1: Evidence-Based Reality
+- **NEVER** claim success without running actual verification queries
+- **ALWAYS** show real data counts, not assumptions
+- **DOCUMENT** actual query results in all status reports
+- **VERIFY** functionality with working examples, not theoretical descriptions
+
+#### VERIFICATION LEVEL 2: Production Environment Compliance  
+- **OPERATE** only within documented production environment and tools
+- **USE** specified tech stack (FastAPI, PyTest, Logfire, TaskMaster AI, Pydantic AI)
+- **MEET** all documented performance targets (sub-100ms, 90% test coverage)
+- **VALIDATE** against production requirements, not alternative implementations
+
+#### VERIFICATION LEVEL 3: Public-Ready Standards
+- **ENSURE** production-grade quality suitable for public release
+- **DEMONSTRATE** all functionality works to documented specifications  
+- **PROVIDE** complete test coverage and performance validation
+- **DELIVER** systems that meet professional development standards
+
+### Mandatory Verification Queries (Run Before Any Completion Claim):
+```bash
+# Database connectivity & data existence
+surreal sql --conn ws://localhost:8000/rpc --user root --pass root --ns ptolemies --db knowledge --pretty <<< "SELECT count() FROM document_chunks GROUP ALL;"
+
+# Source coverage verification  
+surreal sql --conn ws://localhost:8000/rpc --user root --pass root --ns ptolemies --db knowledge --pretty <<< "SELECT source_name, count() as chunks FROM document_chunks GROUP BY source_name ORDER BY chunks DESC;"
+
+# Quality & performance metrics
+surreal sql --conn ws://localhost:8000/rpc --user root --pass root --ns ptolemies --db knowledge --pretty <<< "SELECT math::mean(quality_score) as avg_quality FROM document_chunks GROUP ALL;"
+
+# Functionality demonstration
+surreal sql --conn ws://localhost:8000/rpc --user root --pass root --ns ptolemies --db knowledge --pretty <<< "SELECT title, source_name FROM document_chunks WHERE string::contains(content, 'API') LIMIT 3;"
+```
+
+### Historical Pattern Recognition:
+**PREVIOUS FAILURES DOCUMENTED:**
+1. Claimed "784 pages complete" without checking actual count (found 161)
+2. Stated "vector search ready" without verifying embeddings (found NONE)
+3. Reported "migration complete" without testing functionality
+4. Created completion reports without running verification queries
+
+**CORRECTIVE MEASURES:**
+- All completion claims MUST include verification query results
+- All functionality claims MUST be demonstrated with working examples  
+- All performance claims MUST show actual metrics
+- All system status reports MUST reflect verified reality
 
 ## Project Information
 - **Organization**: DevQ.ai
-- **Project**: Machina - Unified MCP Registry & Management Platform
-- **Repository**: /Users/dionedge/devqai/machina/
-- **Purpose**: Central registry for 46 MCP servers with health monitoring and configuration management
+- **Project**: Ptolemies - Advanced Knowledge Management Platform
+- **Repository**: /Users/dionedge/devqai/ptolemies/
+- **Purpose**: 784-page technical documentation knowledge base with vector search, graph relationships, and sub-100ms query performance
 - **Rules Reference**: [./rules](./rules) directory for comprehensive development guidelines
 
 ## 🚫 BRANDING RESTRICTION
@@ -89,15 +180,30 @@ async def create_pydantic_agent():
 
 #### Context7 (Redis-backed contextual reasoning)
 ```bash
-# Verify Context7 accessibility
-python -c "from context7_mcp.server import Context7MCPServer; print('Context7 accessible')"
+# Verify Context7 accessibility through MCP
+# Use in Claude conversation: "Use context7 to get status"
+# Expected response: Server status with Redis/OpenAI connectivity
 ```
+
+**Context7 MCP Tools:**
+- `context7_status` - Check server and connection status
+- `store_document` - Store documentation with embeddings
+- `search_documents` - Semantic similarity search
+- `crawl_documentation` - Web content extraction
+- `get_context` - Contextual information retrieval
 
 #### Ptolemies Knowledge Base
 ```bash
-# Verify Ptolemies knowledge base
-PYTHONPATH=src python -m ptolemies.cli search "FastAPI testing patterns"
+# Verify Ptolemies through MCP
+# Use in Claude conversation: "Use ptolemies to search for FastAPI testing patterns"
+# Expected response: Relevant knowledge base entries
 ```
+
+**Ptolemies MCP Tools:**
+- `ptolemies_search` - Search knowledge base
+- `ptolemies_list` - List available knowledge
+- `ptolemies_get` - Retrieve specific entries
+- `ptolemies_status` - Check knowledge base status
 
 #### Additional Knowledge Tools
 - **Bayes**: Statistical modeling and analysis
@@ -119,18 +225,20 @@ python -c "import pytest; print('✅ PyTest:', pytest.__version__)"
 python -c "import logfire; print('✅ Logfire:', logfire.__version__)"
 python -c "import pydantic_ai; print('✅ Pydantic AI:', pydantic_ai.__version__)"
 
-# MCP Server Verification
-npx task-master-ai --version && echo "✅ TaskMaster AI accessible"
-
-# Knowledge Base Verification
-PYTHONPATH=src python -m ptolemies.cli list | head -5 && echo "✅ Ptolemies accessible"
-python -c "from context7_mcp.server import Context7MCPServer; print('✅ Context7 accessible')"
-
 # Database Verification
 curl -s http://localhost:8000/status && echo "✅ SurrealDB accessible"
-python -c "import redis; print('✅ Redis accessible')"
+python -c "import redis; print('✅ Redis accessible"
 
-echo "🎉 Tool verification complete!"
+echo "🎉 Framework verification complete!"
+echo ""
+echo "📡 MCP Server Verification Required:"
+echo "Use these commands in Claude conversation:"
+echo "  - 'Use context7 to get status'"
+echo "  - 'Use ptolemies to list knowledge'"
+echo "  - 'Use surrealdb to check connection'"
+echo "  - 'Use taskmaster-ai to verify status'"
+echo "  - 'Use filesystem to list current directory'"
+echo "  - 'Use git to check repository status'"
 ```
 
 ---
@@ -386,13 +494,18 @@ UPSTASH_REDIS_REST_TOKEN=your_redis_token
 ## 🎯 Usage Workflow
 
 ### Daily Development Process
-1. **Tool Verification**: Run tools-verification.sh
-2. **Session Initialization**: Start Zed, source DevQ.ai environment
-3. **Task Management**: Use TaskMaster AI for task breakdown
-4. **Implementation**: Follow FastAPI + PyTest + Logfire pattern
-5. **Testing**: Ensure 90% coverage before subtask progression
-6. **Monitoring**: Review Logfire dashboards for performance
-7. **Documentation**: Update comprehensive summaries
+1. **MCP Server Verification**: Verify ALL MCP servers are connected and functional
+   - Use context7 status check
+   - Use ptolemies list command
+   - Use surrealdb connection test
+   - Use taskmaster-ai verification
+2. **Tool Verification**: Run tools-verification.sh
+3. **Session Initialization**: Start Zed, source DevQ.ai environment
+4. **Task Management**: Use TaskMaster AI for task breakdown (via MCP)
+5. **Implementation**: Follow FastAPI + PyTest + Logfire pattern
+6. **Testing**: Ensure 90% coverage before subtask progression
+7. **Monitoring**: Review Logfire dashboards for performance
+8. **Documentation**: Update comprehensive summaries
 
 ### Subtask Completion Requirements
 Each subtask must include:
@@ -404,4 +517,35 @@ Each subtask must include:
 
 ---
 
-This configuration ensures Claude Code operates within the DevQ.ai ecosystem with all required tools accessible and properly integrated.
+This configuration ensures Claude Code operates within the DevQ.ai ecosystem with all required MCP servers connected and properly integrated.
+
+## 🔌 MCP Server Integration Protocol
+
+### Mandatory MCP Server Usage
+**CRITICAL**: MCP servers are the PRIMARY interface for extended capabilities. Always prefer MCP server tools over custom implementations.
+
+#### MCP Server Priority Order:
+1. **Knowledge Operations**: Use `context7` and `ptolemies` MCP servers
+2. **Database Operations**: Use `surrealdb` MCP server  
+3. **Task Management**: Use `taskmaster-ai` MCP server
+4. **File Operations**: Use `filesystem` MCP server
+5. **Version Control**: Use `git` MCP server
+
+#### Example MCP-First Workflow:
+```markdown
+# CORRECT Approach (Using MCP Servers):
+1. "Use context7 to search for authentication patterns"
+2. "Use ptolemies to find related knowledge"
+3. "Use surrealdb to query vector embeddings"
+4. "Use taskmaster-ai to break down the implementation"
+
+# INCORRECT Approach (Direct Python calls):
+1. Creating Python scripts to call MCP servers
+2. Implementing functionality that MCP servers provide
+3. Using subprocess to interact with MCP tools
+```
+
+This configuration ensures Claude Code operates within the DevQ.ai ecosystem with all required tools accessible and properly integrated through MCP servers.
+
+## Neo4j Framework References
+- **@neo4j_current_framework.txt** - A key reference for graph database integration and modeling techniques

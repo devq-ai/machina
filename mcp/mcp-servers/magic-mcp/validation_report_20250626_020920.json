@@ -1,0 +1,105 @@
+{
+  "server_info": {
+    "name": "magic-mcp",
+    "version": "1.0.0",
+    "initialization_time": 0.026330947875976562,
+    "ai_providers_available": 2,
+    "parsers_available": 3
+  },
+  "tests": [
+    {
+      "name": "Server Initialization",
+      "status": "PASSED",
+      "details": "Server initialized with all required components",
+      "timestamp": "2025-06-26T02:08:16.086082"
+    },
+    {
+      "name": "Tool Registration",
+      "status": "FAILED",
+      "details": "Server.list_tools.<locals>.decorator() missing 1 required positional argument: 'func'",
+      "timestamp": "2025-06-26T02:08:16.086122"
+    },
+    {
+      "name": "Code Generation",
+      "status": "PASSED",
+      "details": "Code generation successful for 2 test cases",
+      "timestamp": "2025-06-26T02:08:47.415974"
+    },
+    {
+      "name": "Code Analysis",
+      "status": "PASSED",
+      "details": "Code analysis completed with valid metrics",
+      "timestamp": "2025-06-26T02:08:47.417624"
+    },
+    {
+      "name": "Code Refactoring",
+      "status": "PASSED",
+      "details": "Code refactoring completed successfully",
+      "timestamp": "2025-06-26T02:08:47.420334"
+    },
+    {
+      "name": "Code Translation",
+      "status": "PASSED",
+      "details": "Code translation completed successfully",
+      "timestamp": "2025-06-26T02:08:49.208957"
+    },
+    {
+      "name": "Test Generation",
+      "status": "PASSED",
+      "details": "Test generation completed successfully",
+      "timestamp": "2025-06-26T02:09:06.445771"
+    },
+    {
+      "name": "Documentation Generation",
+      "status": "PASSED",
+      "details": "Documentation generation completed successfully",
+      "timestamp": "2025-06-26T02:09:17.797897"
+    },
+    {
+      "name": "Code Fixing",
+      "status": "PASSED",
+      "details": "Code fixing completed successfully",
+      "timestamp": "2025-06-26T02:09:20.602416"
+    },
+    {
+      "name": "AI Provider Integration",
+      "status": "PASSED",
+      "details": "AI providers available: [<AIProvider.OPENAI: 'openai'>, <AIProvider.ANTHROPIC: 'anthropic'>]",
+      "timestamp": "2025-06-26T02:09:20.602615"
+    },
+    {
+      "name": "Error Handling",
+      "status": "PASSED",
+      "details": "Error handling works correctly",
+      "timestamp": "2025-06-26T02:09:20.602805"
+    },
+    {
+      "name": "Performance Validation",
+      "status": "PASSED",
+      "details": "Performance acceptable (status: 0.000s)",
+      "timestamp": "2025-06-26T02:09:20.603069"
+    },
+    {
+      "name": "MCP Protocol Compliance",
+      "status": "FAILED",
+      "details": "Server.list_tools.<locals>.decorator() missing 1 required positional argument: 'func'",
+      "timestamp": "2025-06-26T02:09:20.603180"
+    }
+  ],
+  "performance": {
+    "status_response_time": 0.00018906593322753906,
+    "memory_efficient": true,
+    "concurrent_capable": true
+  },
+  "compliance": {},
+  "summary": {
+    "overall_status": "FAILED",
+    "total_tests": 13,
+    "passed": 11,
+    "failed": 2,
+    "warnings": 0,
+    "success_rate": 84.62,
+    "total_time": 64.54,
+    "timestamp": "2025-06-26T02:09:20.603247"
+  }
+}

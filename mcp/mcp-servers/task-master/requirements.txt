@@ -1,0 +1,42 @@
+# Task Master MCP Server Dependencies
+# Production-ready requirements for comprehensive task management
+
+# Core MCP Framework
+mcp>=1.0.0
+pydantic>=2.0.0
+
+# Data Validation and Serialization
+typing-extensions>=4.5.0
+
+# Async Support
+asyncio-mqtt>=0.11.1
+aiofiles>=22.1.0
+
+# Date and Time Handling
+python-dateutil>=2.8.2
+
+# Development and Testing
+pytest>=7.4.0
+pytest-asyncio>=0.21.0
+pytest-cov>=4.1.0
+pytest-mock>=3.11.0
+
+# Code Quality
+black>=23.9.0
+isort>=5.12.0
+mypy>=1.6.0
+flake8>=6.1.0
+
+# Observability (for integration with main Machina platform)
+logfire>=0.28.0
+
+# Utilities
+pathlib2>=2.3.7
+uuid>=1.30
+
+# JSON handling (built-in, but explicit for clarity)
+# json - built-in
+
+# Optional: Enhanced features
+redis>=4.5.0  # For distributed task storage if needed
+httpx>=0.25.0  # For HTTP client capabilities

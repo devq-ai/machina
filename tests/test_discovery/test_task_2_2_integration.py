@@ -147,12 +147,28 @@ class TestTask22Integration:
 
         # Mock Docker client since Docker may not be available in test
         with patch('docker.from_env') as mock_docker:
-            # Create mock container
+            # Create mock container with properly mocked nested attributes
             mock_container = Mock()
             mock_container.id = "abc123def456"
             mock_container.name = "test-web-service"
             mock_container.status = "running"
-            mock_container.image.tags = ["nginx:latest"]
+
+            # Mock the reload method
+            mock_container.reload = Mock()
+
+            # Properly mock the image object
+            mock_image = Mock()
+            mock_image.tags = ["nginx:latest"]
+            mock_image.id = "sha256:abc123def456789"
+            mock_container.image = mock_image
+
+            # Mock labels property
+            mock_labels = {
+                'service.name': 'web-server',
+                'service.type': 'web_server'
+            }
+            mock_container.labels = mock_labels
+
             mock_container.attrs = {
                 'Config': {
                     'Labels': {
@@ -175,11 +191,14 @@ class TestTask22Integration:
                 'State': {
                     'Running': True,
                     'Health': {'Status': 'healthy'}
-                }
+                },
+                'Created': '2023-01-01T00:00:00Z'
             }
 
             mock_client = Mock()
             mock_client.containers.list.return_value = [mock_container]
+            # Mock services for swarm
+            mock_client.services.list.return_value = []
             mock_docker.return_value = mock_client
 
             # Test Docker discovery
@@ -254,14 +273,20 @@ class TestTask22Integration:
             # Mock Consul responses
             mock_response = Mock()
             mock_response.status = 200
-            mock_response.json = asyncio.coroutine(lambda: {
-                'web-service': ['web', 'api'],
-                'db-service': ['database', 'postgres']
-            })
+            async def mock_json():
+                return {
+                    'web-service': ['web', 'api'],
+                    'db-service': ['database', 'postgres']
+                }
+            mock_response.json = mock_json
 
             mock_session_instance = Mock()
-            mock_session_instance.get.return_value.__aenter__ = asyncio.coroutine(lambda: mock_response)
-            mock_session_instance.get.return_value.__aexit__ = asyncio.coroutine(lambda *args: None)
+            async def mock_aenter(self):
+                return mock_response
+            async def mock_aexit(self, *args):
+                return None
+            mock_session_instance.get.return_value.__aenter__ = mock_aenter
+            mock_session_instance.get.return_value.__aexit__ = mock_aexit
             mock_session.return_value = mock_session_instance
 
             consul_params = {
@@ -277,17 +302,19 @@ class TestTask22Integration:
             assert connected == True
 
             # Mock service details response
-            mock_response.json = asyncio.coroutine(lambda: [
-                {
-                    'ServiceName': 'web-service',
-                    'ServiceID': 'web-1',
-                    'ServiceAddress': '192.168.1.10',
-                    'ServicePort': 8080,
-                    'ServiceTags': ['web', 'api'],
-                    'Node': 'node-1',
-                    'Address': '192.168.1.10'
-                }
-            ])
+            async def mock_json_details():
+                return [
+                    {
+                        'ServiceName': 'web-service',
+                        'ServiceID': 'web-1',
+                        'ServiceAddress': '192.168.1.10',
+                        'ServicePort': 8080,
+                        'ServiceTags': ['web', 'api'],
+                        'Node': 'node-1',
+                        'Address': '192.168.1.10'
+                    }
+                ]
+            mock_response.json = mock_json_details
 
             # Test service discovery
             services = await consul_adapter.discover_services()
@@ -304,30 +331,36 @@ class TestTask22Integration:
         with patch('aiohttp.ClientSession') as mock_session:
             mock_response = Mock()
             mock_response.status = 200
-            mock_response.json = asyncio.coroutine(lambda: {
-                'items': [
-                    {
-                        'metadata': {
-                            'name': 'web-service',
-                            'namespace': 'default',
-                            'uid': 'abc-123-def',
-                            'labels': {'app': 'web', 'tier': 'frontend'}
-                        },
-                        'spec': {
-                            'clusterIP': '10.0.0.1',
-                            'type': 'ClusterIP',
-                            'ports': [
-                                {'port': 80, 'targetPort': 8080, 'protocol': 'TCP'}
-                            ],
-                            'selector': {'app': 'web'}
+            async def mock_k8s_json():
+                return {
+                    'items': [
+                        {
+                            'metadata': {
+                                'name': 'web-service',
+                                'namespace': 'default',
+                                'uid': 'abc-123-def',
+                                'labels': {'app': 'web', 'tier': 'frontend'}
+                            },
+                            'spec': {
+                                'clusterIP': '10.0.0.1',
+                                'type': 'ClusterIP',
+                                'ports': [
+                                    {'port': 80, 'targetPort': 8080, 'protocol': 'TCP'}
+                                ],
+                                'selector': {'app': 'web'}
+                            }
                         }
-                    }
-                ]
-            })
+                    ]
+                }
+            mock_response.json = mock_k8s_json
 
             mock_session_instance = Mock()
-            mock_session_instance.get.return_value.__aenter__ = asyncio.coroutine(lambda: mock_response)
-            mock_session_instance.get.return_value.__aexit__ = asyncio.coroutine(lambda *args: None)
+            async def mock_k8s_aenter(self):
+                return mock_response
+            async def mock_k8s_aexit(self, *args):
+                return None
+            mock_session_instance.get.return_value.__aenter__ = mock_k8s_aenter
+            mock_session_instance.get.return_value.__aexit__ = mock_k8s_aexit
             mock_session.return_value = mock_session_instance
 
             k8s_params = {

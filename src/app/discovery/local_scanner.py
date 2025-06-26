@@ -213,7 +213,6 @@ class LocalServiceScanner:
                 if matching_files:
                     type_score += 2
                     type_files.extend([os.path.join(directory, f) for f in matching_files])
-                    config_files.extend(type_files)
 
             # Check file contents for indicators
             if type_files:
@@ -230,9 +229,28 @@ class LocalServiceScanner:
         detected_types.sort(key=lambda x: x[1], reverse=True)
         primary_type, score, primary_files = detected_types[0]
 
+        # For JavaScript-based services, include package.json if it exists
+        all_config_files = list(primary_files)
+        if primary_type in ['express', 'node'] and 'package.json' in items:
+            package_json_path = os.path.join(directory, 'package.json')
+            if package_json_path not in all_config_files:
+                all_config_files.append(package_json_path)
+
+        # For Python-based services, include Python config files if they exist
+        if primary_type in ['fastapi', 'flask', 'python']:
+            python_config_files = ['pyproject.toml', 'setup.py', 'requirements.txt', 'Pipfile']
+            for config_file in python_config_files:
+                if config_file in items:
+                    config_path = os.path.join(directory, config_file)
+                    if config_path not in all_config_files:
+                        all_config_files.append(config_path)
+
+        # Build final config files list
+        config_files = all_config_files
+
         # Extract service metadata
         try:
-            metadata = self._extract_service_metadata(primary_type, primary_files, directory)
+            metadata = self._extract_service_metadata(primary_type, all_config_files, directory)
         except Exception as e:
             logger.warning(f"Error extracting metadata for {directory}: {e}")
             metadata = {}
@@ -344,6 +362,10 @@ class LocalServiceScanner:
             except Exception as e:
                 logger.warning(f"Error parsing {config_file}: {e}")
 
+        # Extract additional metadata from source code analysis
+        source_metadata = self._analyze_source_code(config_files, service_type, directory)
+        metadata.update(source_metadata)
+
         return metadata
 
     def _parse_package_json(self, file_path: str) -> Dict[str, Any]:
@@ -351,16 +373,48 @@ class LocalServiceScanner:
         with open(file_path, 'r') as f:
             data = json.load(f)
 
-        return {
+        # Extract framework indicators from dependencies
+        dependencies = data.get('dependencies', {})
+        dev_dependencies = data.get('devDependencies', {})
+        all_deps = list(dependencies.keys()) + list(dev_dependencies.keys())
+
+        framework_indicators = []
+        if 'express' in all_deps:
+            framework_indicators.append('express')
+        if 'fastify' in all_deps:
+            framework_indicators.append('fastify')
+        if 'koa' in all_deps:
+            framework_indicators.append('koa')
+        if 'next' in all_deps or 'next.js' in all_deps:
+            framework_indicators.append('next.js')
+        if 'typescript' in all_deps:
+            framework_indicators.append('typescript')
+
+        # Combine regular and dev dependencies
+        all_deps = list(dependencies.keys()) + list(dev_dependencies.keys())
+
+        result = {
             'name': data.get('name'),
             'version': data.get('version'),
             'description': data.get('description'),
             'main': data.get('main'),
             'scripts': data.get('scripts', {}),
-            'dependencies': list(data.get('dependencies', {}).keys()),
+            'dependencies': all_deps,
             'engines': data.get('engines', {}),
-            'keywords': data.get('keywords', [])
+            'keywords': data.get('keywords', []),
+            'framework_indicators': framework_indicators,
+            'license': data.get('license')
         }
+
+        # Add author information if available
+        author = data.get('author')
+        if author:
+            if isinstance(author, str):
+                result['author'] = author
+            elif isinstance(author, dict):
+                result['author'] = author.get('name', str(author))
+
+        return result
 
     def _parse_pyproject_toml(self, file_path: str) -> Dict[str, Any]:
         """Parse Python pyproject.toml file."""
@@ -368,14 +422,36 @@ class LocalServiceScanner:
             data = toml.load(f)
 
         project = data.get('project', {})
-        return {
+        dependencies = project.get('dependencies', [])
+
+        # Extract framework indicators
+        framework_indicators = []
+        dep_str = ' '.join(dependencies)
+        if 'fastapi' in dep_str.lower():
+            framework_indicators.append('fastapi')
+        if 'flask' in dep_str.lower():
+            framework_indicators.append('flask')
+        if 'django' in dep_str.lower():
+            framework_indicators.append('django')
+        if 'uvicorn' in dep_str.lower():
+            framework_indicators.append('uvicorn')
+
+        result = {
             'name': project.get('name'),
             'version': project.get('version'),
             'description': project.get('description'),
-            'dependencies': project.get('dependencies', []),
+            'dependencies': dependencies,
             'keywords': project.get('keywords', []),
-            'entry_points': data.get('project', {}).get('entry-points', {})
+            'entry_points': data.get('project', {}).get('entry-points', {}),
+            'framework_indicators': framework_indicators
         }
+
+        # Add author information
+        authors = project.get('authors', [])
+        if authors and len(authors) > 0:
+            result['author'] = authors[0].get('name', str(authors[0]))
+
+        return result
 
     def _parse_setup_py(self, file_path: str) -> Dict[str, Any]:
         """Parse Python setup.py file (basic extraction)."""
@@ -409,6 +485,7 @@ class LocalServiceScanner:
         metadata = {
             'docker_services': list(services.keys()),
             'compose_version': data.get('version'),
+            'service_count': len(services),
             'ports': []
         }
 
@@ -481,12 +558,30 @@ class LocalServiceScanner:
         if 'health_endpoint' in metadata:
             return metadata['health_endpoint']
 
-        # Try to determine from service type and configuration
-        health_paths = self.service_patterns.get(service_type, {}).get('health_paths', [])
+        # Extract host and port
+        host = metadata.get('host', 'localhost')
+        port = metadata.get('port')
 
-        if health_paths and 'port' in metadata:
-            port = metadata['port']
-            return f"http://localhost:{port}{health_paths[0]}"
+        if not port:
+            # Use default port for service type
+            default_ports = {
+                'fastapi': 8000,
+                'flask': 5000,
+                'express': 3000,
+                'node': 3000,
+                'python': 8000
+            }
+            port = default_ports.get(service_type, 8000)
+
+        # Check for detected health paths from source code analysis first
+        detected_health_paths = metadata.get('detected_health_paths', [])
+        if detected_health_paths:
+            return f"http://{host}:{port}{detected_health_paths[0]}"
+
+        # Fall back to default health paths for service type
+        health_paths = self.service_patterns.get(service_type, {}).get('health_paths', [])
+        if health_paths:
+            return f"http://{host}:{port}{health_paths[0]}"
 
         return None
 
@@ -525,6 +620,116 @@ class LocalServiceScanner:
             port = default_ports.get(service_type)
 
         return host, port
+
+    def _analyze_source_code(self, config_files: List[str], service_type: str, directory: str) -> Dict[str, Any]:
+        """
+        Analyze source code files to extract additional metadata like ports and health endpoints.
+
+        Args:
+            config_files: List of configuration file paths
+            service_type: Type of service detected
+            directory: Service directory path
+
+        Returns:
+            Dictionary containing extracted metadata from source analysis
+        """
+        metadata = {}
+
+        # Find source files to analyze
+        source_files = []
+        common_source_patterns = {
+            'python': ['*.py'],
+            'fastapi': ['main.py', 'app.py', '*.py'],
+            'flask': ['app.py', 'run.py', 'wsgi.py', '*.py'],
+            'node': ['*.js', '*.ts'],
+            'express': ['server.js', 'app.js', 'index.js', '*.js']
+        }
+
+        patterns = common_source_patterns.get(service_type, ['*.*'])
+
+        for pattern in patterns:
+            if '*' in pattern:
+                # Use glob for wildcard patterns
+                import glob
+                files = glob.glob(os.path.join(directory, pattern))
+                source_files.extend(files)
+            else:
+                # Direct file check
+                file_path = os.path.join(directory, pattern)
+                if os.path.exists(file_path):
+                    source_files.append(file_path)
+
+        # Analyze source files
+        detected_port = None
+        detected_health_paths = []
+        framework_indicators = metadata.get('framework_indicators', [])
+
+        for source_file in source_files[:10]:  # Limit to first 10 files for performance
+            try:
+                with open(source_file, 'r', encoding='utf-8', errors='ignore') as f:
+                    content = f.read()
+
+                # Port detection patterns
+                port_patterns = [
+                    r'port\s*[=:]\s*(\d+)',
+                    r'PORT\s*[=:]\s*(\d+)',
+                    r'\.listen\s*\(\s*(\d+)',
+                    r'uvicorn\.run\s*\([^)]*port\s*=\s*(\d+)',
+                    r'app\.run\s*\([^)]*port\s*=\s*(\d+)',
+                    r'server\.listen\s*\(\s*(\d+)'
+                ]
+
+                for pattern in port_patterns:
+                    import re
+                    matches = re.findall(pattern, content, re.IGNORECASE)
+                    if matches:
+                        try:
+                            detected_port = int(matches[0])
+                            break
+                        except ValueError:
+                            continue
+
+                # Health endpoint detection
+                health_patterns = [
+                    r'@app\.route\s*\(\s*["\']([^"\']*health[^"\']*)["\']',
+                    r'@app\.get\s*\(\s*["\']([^"\']*health[^"\']*)["\']',
+                    r'app\.get\s*\(\s*["\']([^"\']*health[^"\']*)["\']',
+                    r'router\.get\s*\(\s*["\']([^"\']*health[^"\']*)["\']',
+                    r'["\']([^"\']*(?:health|status|ping|healthz)[^"\']*)["\']'
+                ]
+
+                for pattern in health_patterns:
+                    matches = re.findall(pattern, content, re.IGNORECASE)
+                    for match in matches:
+                        if match.startswith('/') and len(match) > 1:
+                            detected_health_paths.append(match)
+
+                # Framework detection from imports and usage
+                if 'fastapi' in content.lower() or 'FastAPI' in content:
+                    if 'fastapi' not in framework_indicators:
+                        framework_indicators.append('fastapi')
+                if 'flask' in content.lower() or 'Flask' in content:
+                    if 'flask' not in framework_indicators:
+                        framework_indicators.append('flask')
+                if 'express' in content.lower():
+                    if 'express' not in framework_indicators:
+                        framework_indicators.append('express')
+
+            except Exception as e:
+                logger.debug(f"Error analyzing source file {source_file}: {e}")
+                continue
+
+        # Update metadata with findings
+        if detected_port:
+            metadata['port'] = detected_port
+
+        if detected_health_paths:
+            metadata['detected_health_paths'] = list(set(detected_health_paths))
+
+        if framework_indicators:
+            metadata['framework_indicators'] = framework_indicators
+
+        return metadata
 
     def scan_specific_directory(self, directory: str) -> List[ServiceInfo]:
         """

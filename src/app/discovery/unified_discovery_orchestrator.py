@@ -440,7 +440,7 @@ class UnifiedDiscoveryOrchestrator:
                 service_dicts.append(service_dict)
 
             # Validate in batches
-            validation_results = self.service_validator.validate_service_batch(service_dicts)
+            validation_results = await self._validate_service_batch_async(service_dicts)
 
             # Apply validation results
             for i, service in enumerate(services):
@@ -462,6 +462,29 @@ class UnifiedDiscoveryOrchestrator:
             validated_services = services
 
         return validated_services
+
+    async def _validate_service_batch_async(self, services: List[Dict[str, Any]]) -> List:
+        """Async wrapper for batch service validation"""
+        tasks = [self.service_validator.validate_service(service) for service in services]
+        results = await asyncio.gather(*tasks, return_exceptions=True)
+
+        # Handle exceptions in results
+        validated_results = []
+        for i, result in enumerate(results):
+            if isinstance(result, Exception):
+                service_id = services[i].get('id', f'service_{i}')
+                # Create a simple validation result
+                validated_results.append(type('ValidationResult', (), {
+                    'is_valid': False,
+                    'service_id': service_id,
+                    'validation_type': 'error',
+                    'issues': [f"Validation error: {str(result)}"],
+                    'warnings': []
+                })())
+            else:
+                validated_results.append(result)
+
+        return validated_results
 
     async def _check_service_health(self, services: List[UnifiedServiceInfo]) -> List[UnifiedServiceInfo]:
         """Check health of discovered services"""

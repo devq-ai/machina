@@ -1,0 +1,28 @@
+machina/server_outline.txt
+```
+class TaskMasterServer [L11-428]
+ def __init__ [L17-34]
+ async def create_task [L46-65]
+ async def get_task_status [L74-79]
+ async def list_tasks [L88-91]
+ async def cancel_task [L100-118]
+ async def update_task [L133-146]
+ class TaskMasterServer [L157-423]
+  def __init__ [L163-180]
+  async def create_task [L192-211]
+  async def get_task_status [L220-225]
+  async def list_tasks [L234-237]
+  async def cancel_task [L246-264]
+  async def update_task [L279-348]
+  async def start_task [L350-369]
+  async def list_completed_tasks [L376-384]
+  def is_task_completed [L393-399]
+  async def propagate_task_completion [L401-414]
+  async def log_event [L416-423]
+
+Showing symbols 1-19 (total symbols: 19)
+
+
+Using the line numbers in this outline, you can call this tool again
+while specifying the start_line and end_line fields to see the
+implementations of symbols in the outline.
