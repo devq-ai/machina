@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!-- Last updated: 2024-01-26 18:50 PST - Terminal theme update -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -16,11 +15,11 @@
         }
 
         body {
-            font-family: 'Courier New', Courier, monospace;
-            background: #0a0a0a;
+            font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+            background-color: #0a0a0a;
             color: #39ff14;
-            line-height: 1.6;
-            padding: 20px;
+            line-height: 1.4;
+            padding: 40px 20px;
         }
 
         .container {
@@ -28,438 +27,147 @@
             margin: 0 auto;
         }
 
-        .header {
+        header {
             text-align: center;
-            margin-bottom: 40px;
-            padding: 20px;
-            border: 2px solid #39ff14;
-            background: rgba(57, 255, 20, 0.05);
+            margin-bottom: 30px;
         }
 
         h1 {
-            font-size: 3em;
+            font-size: 2.5em;
+            font-weight: normal;
+            letter-spacing: 0.1em;
             margin-bottom: 10px;
             text-shadow: 0 0 20px #39ff14;
         }
 
         .subtitle {
-            color: #39ff14;
-            opacity: 0.8;
-            font-size: 1.2em;
-        }
-
-        .status-section {
-            background: rgba(0, 0, 0, 0.8);
-            border: 1px solid #39ff14;
-            padding: 20px;
+            color: rgba(57, 255, 20, 0.8);
+            font-size: 1em;
             margin-bottom: 20px;
-            position: relative;
-        }
-
-        .status-section::before {
-            content: '';
-            position: absolute;
-            top: -1px;
-            left: -1px;
-            right: -1px;
-            bottom: -1px;
-            background: linear-gradient(45deg, #39ff14, transparent);
-            opacity: 0.3;
-            z-index: -1;
-        }
-
-        h2 {
-            color: #39ff14;
-            margin-bottom: 15px;
-            font-size: 1.5em;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .icon {
-            font-size: 1.2em;
-        }
-
-        .status-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-
-        .metric {
-            display: flex;
-            justify-content: space-between;
-            padding: 8px 0;
-            border-bottom: 1px solid rgba(57, 255, 20, 0.2);
-        }
-
-        .metric:last-child {
-            border-bottom: none;
-        }
-
-        .metric-label {
-            color: rgba(57, 255, 20, 0.7);
-        }
-
-        .metric-value {
-            color: #39ff14;
-            font-weight: bold;
-        }
-
-        .progress-container {
-            margin: 15px 0;
-        }
-
-        .progress-bar {
-            width: 100%;
-            height: 20px;
-            background: rgba(57, 255, 20, 0.1);
-            border: 1px solid rgba(57, 255, 20, 0.3);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #39ff14, #32cd32);
-            transition: width 0.5s ease;
-            position: relative;
-        }
-
-        .progress-fill::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            animation: shimmer 2s infinite;
-        }
-
-        @keyframes shimmer {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
-        }
-
-        .server-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-top: 10px;
-        }
-
-        .server-tag {
-            background: rgba(57, 255, 20, 0.1);
-            border: 1px solid rgba(57, 255, 20, 0.5);
-            color: #39ff14;
-            padding: 4px 10px;
-            font-size: 0.85em;
-            font-family: 'Courier New', monospace;
-        }
-
-        .status-badge {
-            display: inline-block;
-            padding: 4px 12px;
-            background: #39ff14;
-            color: #0a0a0a;
-            font-weight: bold;
-            text-transform: uppercase;
-            font-size: 0.85em;
-        }
-
-        .json-viewer {
-            background: #000;
-            border: 1px solid #39ff14;
-            padding: 15px;
-            margin-top: 20px;
-            font-size: 0.9em;
-            overflow-x: auto;
-            white-space: pre;
-        }
-
-        .footer {
-            text-align: center;
-            margin-top: 40px;
-            padding: 20px;
-            border-top: 1px solid rgba(57, 255, 20, 0.3);
-            color: rgba(57, 255, 20, 0.7);
-        }
-
-        .footer a {
-            color: #39ff14;
-            text-decoration: none;
-        }
-
-        .footer a:hover {
-            text-shadow: 0 0 10px #39ff14;
         }
 
         .refresh-button {
             background: transparent;
-            border: 1px solid #39ff14;
             color: #39ff14;
+            border: 1px solid #39ff14;
             padding: 8px 16px;
-            cursor: pointer;
-            font-family: 'Courier New', monospace;
+            font-family: inherit;
             font-size: 0.9em;
-            transition: all 0.3s;
+            cursor: pointer;
+            transition: all 0.3s ease;
             text-transform: uppercase;
         }
 
         .refresh-button:hover {
             background: rgba(57, 255, 20, 0.1);
-            box-shadow: 0 0 20px rgba(57, 255, 20, 0.5);
+            box-shadow: 0 0 15px rgba(57, 255, 20, 0.5);
         }
 
-        .timestamp {
-            color: rgba(57, 255, 20, 0.7);
-            font-size: 0.9em;
-            margin-top: 10px;
+        pre {
+            margin: 0;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-size: 0.95em;
+            line-height: 1.6;
         }
 
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2em;
-            }
+        /* JSON Syntax Highlighting */
+        .json-key {
+            color: #ff79c6;
+        }
 
-            .status-grid {
-                grid-template-columns: 1fr;
-            }
+        .json-string {
+            color: #50fa7b;
+        }
+
+        .json-number {
+            color: #bd93f9;
+        }
+
+        .json-boolean {
+            color: #ffb86c;
+        }
+
+        .json-null {
+            color: #ff5555;
+        }
+
+        /* Loading animation */
+        .loading {
+            text-align: center;
+            color: rgba(57, 255, 20, 0.6);
+        }
+
+        /* Error message */
+        .error {
+            color: #ff5555;
+            text-align: center;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="header">
-            <h1>🏛️ Machina Status JSON</h1>
+        <header>
+            <h1>🏛 Machina Status JSON</h1>
             <p class="subtitle">Raw JSON data for MCP Registry Platform</p>
-            <button class="refresh-button" onclick="loadStatus()">↻ Refresh JSON</button>
-        </div>
+            <button class="refresh-button" onclick="refreshStatus()">🔄 Refresh JSON</button>
+        </header>
 
-        <div class="status-grid">
-            <div class="status-section">
-                <h2><span class="icon">🔧</span>System Status</h2>
-                <div class="metric">
-                    <span class="metric-label">"status":</span>
-                    <span class="status-badge">Production Ready</span>
-                </div>
-                <div class="metric">
-                    <span class="metric-label">"version":</span>
-                    <span class="metric-value">"1.0.0"</span>
-                </div>
-                <div class="metric">
-                    <span class="metric-label">"environment":</span>
-                    <span class="metric-value">"production"</span>
-                </div>
-                <div class="metric">
-                    <span class="metric-label">"test_coverage":</span>
-                    <span class="metric-value">"100%"</span>
-                </div>
-            </div>
-
-            <div class="status-section">
-                <h2><span class="icon">📊</span>Implementation Progress</h2>
-                <div class="metric">
-                    <span class="metric-label">"mcp_servers":</span>
-                    <span class="metric-value">15 / 46</span>
-                </div>
-                <div class="progress-container">
-                    <div class="progress-bar">
-                        <div class="progress-fill" style="width: 32.61%"></div>
-                    </div>
-                </div>
-                <div class="metric">
-                    <span class="metric-label">"completion":</span>
-                    <span class="metric-value">"32.61%"</span>
-                </div>
-                <div class="metric">
-                    <span class="metric-label">"production_ready":</span>
-                    <span class="metric-value">15</span>
-                </div>
-            </div>
-
-            <div class="status-section">
-                <h2><span class="icon">💻</span>Code Metrics</h2>
-                <div class="metric">
-                    <span class="metric-label">"lines_of_code":</span>
-                    <span class="metric-value">8500+</span>
-                </div>
-                <div class="metric">
-                    <span class="metric-label">"tools_implemented":</span>
-                    <span class="metric-value">115</span>
-                </div>
-                <div class="metric">
-                    <span class="metric-label">"avg_per_server":</span>
-                    <span class="metric-value">567</span>
-                </div>
-                <div class="metric">
-                    <span class="metric-label">"production_code":</span>
-                    <span class="metric-value">"100%"</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="status-section">
-            <h2><span class="icon">🚀</span>Batch 1 Servers</h2>
-            <div class="metric">
-                <span class="metric-label">"status":</span>
-                <span class="metric-value">"100% Complete"</span>
-            </div>
-            <div class="metric">
-                <span class="metric-label">"count":</span>
-                <span class="metric-value">7</span>
-            </div>
-            <div class="server-list">
-                <span class="server-tag">ptolemies-mcp</span>
-                <span class="server-tag">stripe-mcp</span>
-                <span class="server-tag">shopify-mcp</span>
-                <span class="server-tag">bayes-mcp</span>
-                <span class="server-tag">darwin-mcp</span>
-                <span class="server-tag">docker-mcp</span>
-                <span class="server-tag">fastmcp-mcp</span>
-            </div>
-        </div>
-
-        <div class="status-section">
-            <h2><span class="icon">🌟</span>Batch 2 Servers</h2>
-            <div class="metric">
-                <span class="metric-label">"status":</span>
-                <span class="metric-value">"100% Complete"</span>
-            </div>
-            <div class="metric">
-                <span class="metric-label">"count":</span>
-                <span class="metric-value">8</span>
-            </div>
-            <div class="server-list">
-                <span class="server-tag">upstash-mcp</span>
-                <span class="server-tag">calendar-mcp</span>
-                <span class="server-tag">gmail-mcp</span>
-                <span class="server-tag">gcp-mcp</span>
-                <span class="server-tag">github-mcp</span>
-                <span class="server-tag">memory-mcp</span>
-                <span class="server-tag">logfire-mcp</span>
-                <span class="server-tag">shopify-dev-mcp</span>
-            </div>
-        </div>
-
-        <div class="status-section">
-            <h2><span class="icon">📦</span>Deployment</h2>
-            <div class="metric">
-                <span class="metric-label">"docker":</span>
-                <span class="metric-value">"ready"</span>
-            </div>
-            <div class="metric">
-                <span class="metric-label">"api_framework":</span>
-                <span class="metric-value">"FastAPI"</span>
-            </div>
-            <div class="metric">
-                <span class="metric-label">"monitoring":</span>
-                <span class="metric-value">"Logfire"</span>
-            </div>
-            <div class="metric">
-                <span class="metric-label">"testing":</span>
-                <span class="metric-value">"PyTest"</span>
-            </div>
-        </div>
-
-        <div class="json-viewer" id="json-output">
-            <pre>{
-  "system": {
-    "name": "Machina",
-    "version": "1.0.0",
-    "status": "Production Ready",
-    "environment": "production",
-    "test_coverage": "100%",
-    "documentation_url": "https://devq-ai.github.io/machina/",
-    "github_repo": "https://github.com/devq-ai/machina"
-  },
-  "services": {
-    "core_api": {
-      "status": "configured",
-      "endpoint": "http://localhost:8001",
-      "health": "configured",
-      "documentation": "/docs"
-    },
-    "crawler": {
-      "status": "available",
-      "sources_supported": 17,
-      "max_pages": 250,
-      "crawl_depth": 2,
-      "delay": "1000ms"
-    },
-    "surreal": {
-      "status": "configured",
-      "url": "ws://localhost:8000/rpc",
-      "type": "Vector Database",
-      "capabilities": [
-        "vector_search",
-        "document_storage",
-        "semantic_queries"
-      ]
-    }
-  },
-  "metrics": {
-    "total_servers": 46,
-    "implemented": 15,
-    "completion_percentage": 32.61,
-    "production_ready": 15,
-    "lines_of_code": 8500,
-    "tools_implemented": 115,
-    "avg_loc_per_server": 567
-  },
-  "batch_1": {
-    "status": "complete",
-    "servers": ["ptolemies-mcp", "stripe-mcp", "shopify-mcp", "bayes-mcp", "darwin-mcp", "docker-mcp", "fastmcp-mcp"],
-    "count": 7
-  },
-  "batch_2": {
-    "status": "complete",
-    "servers": ["upstash-mcp", "calendar-mcp", "gmail-mcp", "gcp-mcp", "github-mcp", "memory-mcp", "logfire-mcp", "shopify-dev-mcp"],
-    "count": 8
-  }
-}</pre>
-        </div>
-
-        <footer class="footer">
-            <p>
-                <a href="status.json">View Raw Status JSON</a> |
-                <a href="https://github.com/devq-ai/machina">GitHub Repository</a> |
-                <a href="https://devq.ai">DevQ.ai</a>
-            </p>
-            <p class="timestamp" id="status-timestamp">Loading...</p>
-        </footer>
+        <pre id="json-content"><div class="loading">Loading...</div></pre>
     </div>
 
     <script>
+        function syntaxHighlight(json) {
+            json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+            return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
+                var cls = 'json-number';
+                if (/^"/.test(match)) {
+                    if (/:$/.test(match)) {
+                        cls = 'json-key';
+                    } else {
+                        cls = 'json-string';
+                    }
+                } else if (/true|false/.test(match)) {
+                    cls = 'json-boolean';
+                } else if (/null/.test(match)) {
+                    cls = 'json-null';
+                }
+                return '<span class="' + cls + '">' + match + '</span>';
+            });
+        }
+
         async function loadStatus() {
+            const jsonContent = document.getElementById('json-content');
+
             try {
                 const response = await fetch('status.json');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
                 const data = await response.json();
 
-                // Update JSON viewer
-                const jsonOutput = document.getElementById('json-output');
-                jsonOutput.innerHTML = `<pre>${JSON.stringify(data, null, 2)}</pre>`;
-
-                // Update timestamp
-                const timestamp = new Date(data.timestamp).toLocaleString();
-                document.getElementById('status-timestamp').textContent = `Last updated: ${timestamp}`;
-
-                // Add a flash effect to show update
-                jsonOutput.style.borderColor = '#39ff14';
-                setTimeout(() => {
-                    jsonOutput.style.borderColor = '#39ff14';
-                }, 500);
+                // Pretty print and syntax highlight
+                const prettyJson = JSON.stringify(data, null, 2);
+                jsonContent.innerHTML = syntaxHighlight(prettyJson);
 
             } catch (error) {
-                console.error('Failed to load status:', error);
-                document.getElementById('json-output').innerHTML = `<pre>Error loading status: ${error.message}</pre>`;
+                jsonContent.innerHTML = '<div class="error">Error loading status data: ' + error.message + '</div>';
             }
         }
 
-        // Load status on page load
+        function refreshStatus() {
+            const button = document.querySelector('.refresh-button');
+            button.disabled = true;
+            button.textContent = '⏳ Loading...';
+
+            loadStatus().finally(() => {
+                button.disabled = false;
+                button.textContent = '🔄 Refresh JSON';
+            });
+        }
+
+        // Load on page load
         loadStatus();
 
         // Auto-refresh every 30 seconds
