@@ -196,48 +196,81 @@ async def test_cancel_task(server, mock_storage):
 # Test update_task (title, description, priority, dependencies)
 @pytest.mark.asyncio
 async def test_update_task_basic(server, mock_storage):
-    \"\"\"Tests updating task title, description, priority, and dependencies.\"\"\"\
+    """Tests updating task title, description, priority, and dependencies."""
     # Create a task
-    create_response = await server.create_task(title=\"Initial Task\", description=\"Initial desc\", priority=\"low\")
-    task_id = create_response[\"task_id\"]
+    create_response = await server.create_task(title="Initial Task", description="Initial desc", priority="low")
+    task_id = create_response["task_id"]
 
     # Update title, description, priority
     update_response = await server.update_task(
         task_id=task_id,
-        title=\"Updated Task Title\",
-        description=\"Updated description.\",
-        priority=\"high\"
+        title="Updated Task Title",
+        description="Updated description.",
+        priority="high"
     )
-    assert update_response[\"status\"] == \"updated\"
+    assert update_response["status"] == "updated"
 
     # Verify updates in storage
     task = await mock_storage.get_task(task_id)
-    assert task[\"title\"] == \"Updated Task Title\"
-    assert task[\"description\"] == \"Updated description.\"
-    assert task[\"priority\"] == \"high\"
+    assert task["title"] == "Updated Task Title"
+    assert task["description"] == "Updated description."
+    assert task["priority"] == "high"
 
     # Test updating dependencies
     # Create another task to be a dependency
-    dep_create_response = await server.create_task(title=\"Dependency Task\", description=\"This is a dependency\")
-    dep_task_id = dep_create_response[\"task_id\"]
+    dep_create_response = await server.create_task(title="Dependency Task", description="This is a dependency")
+    dep_task_id = dep_create_response["task_id"]
 
     update_deps_response = await server.update_task(
         task_id=task_id,
         dependencies=[dep_task_id]
     )
-    assert update_deps_response[\"status\"] == \"updated\"
+    assert update_deps_response["status"] == "updated"
     task_after_deps_update = await mock_storage.get_task(task_id)
-    assert task_after_deps_update[\"dependencies\"] == [dep_task_id]
+    assert task_after_deps_update["dependencies"] == [dep_task_id]
 
     # Test invalid priority update
-    invalid_priority_update = await server.update_task(task_id=task_id, priority=\"extreme\")
-    assert \"error\" in invalid_priority_update
+    invalid_priority_update = await server.update_task(task_id=task_id, priority="extreme")
+    assert "error" in invalid_priority_update
 
 # Test update_task (status)
 @pytest.mark.asyncio
 async def test_update_task_status(server, mock_storage):
-    \"\"\"Tests updating a task\'s status and its side effects.\"\"\"\
-    # Create a task\n    create_response = await server.create_task(title=\"Status Update Task\", description=\"Task for status tests\")\n    task_id = create_response[\"task_id\"]\n\n    # Create a dependency task that will be completed later\n    dep_create_response = await server.create_task(title=\"Dependency for Status\", description=\"This will be completed\")\n    dep_task_id = dep_create_response[\"task_id\"]\n\n    # Update status to running (should not affect completed_tasks)\n    update_running = await server.update_task(task_id=task_id, status=\"running\")\n    assert update_running[\"status\"] == \"updated\"\n    task_running = await mock_storage.get_task(task_id)\n    assert task_running[\"status\"] == \"running\"\n    # Ensure it\'s not marked as completed in the server\'s memory set\n    assert task_id not in server.completed_tasks\n\n    # Update status to completed\n    update_completed = await server.update_task(task_id=task_id, status=\"completed\")\n    assert update_completed[\"status\"] == \"updated\"\n    task_completed = await mock_storage.get_task(task_id)\n    assert task_completed[\"status\"] == \"completed\"\n    # Check if added to completed_tasks set in server memory (should be managed by storage implicitly, but good to verify)\n    # The `mark_task_completed` in storage should handle this, and `is_task_completed` uses storage.\n    # However, `propagate_task_completion` directly uses `is_task_completed` which uses storage.\n    # The server\'s internal `self.completed_tasks` set might be redundant if storage handles it.\n    # For now, we rely on `is_task_completed` using storage. If `update_task` calls `mark_task_completed` properly, this is covered.\n\n    # Test updating status from completed back to pending\n    update_pending = await server.update_task(task_id=task_id, status=\"pending\")\n    assert update_pending[\"status\"] == \"updated\"\n    task_pending = await mock_storage.get_task(task_id)\n    assert task_pending[\"status\"] == \"pending\"\n    # After resetting status, it should not be considered completed\n    assert task_id not in server.completed_tasks\n\n    # Test updating status to failed\n    update_failed = await server.update_task(task_id=task_id, status=\"failed\")\n    assert update_failed[\"status\"] == \"updated\"\n    task_failed = await mock_storage.get_task(task_id)\n    assert task_failed[\"status\"] == \"failed\"\n    assert task_id not in server.completed_tasks\n\n    # Test updating status to cancelled\n    update_cancelled = await server.update_task(task_id=task_id, status=\"cancelled\")\n    assert update_cancelled[\"status\"] == \"updated\"\n    task_cancelled = await mock_storage.get_task(task_id)\n    assert task_cancelled[\"status\"] == \"cancelled\"\n    assert task_id not in server.completed_tasks\n\n    # Test invalid status update\n    invalid_status_update = await server.update_task(task_id=task_id, status=\"unknown\")\n    assert \"error\" in invalid_status_update\n
+    """Tests updating a task's status and its side effects."""
+    # Create a task
+    create_response = await server.create_task(title="Status Update Task", description="Task for status tests")
+    task_id = create_response["task_id"]
+
+    # Create a dependency task that will be completed later
+    dep_create_response = await server.create_task(title="Dependency for Status", description="This will be completed")
+    dep_task_id = dep_create_response["task_id"]
+
+    # Update status to running (should not affect completed_tasks)
+    update_running = await server.update_task(task_id=task_id, status="running")
+    assert update_running["status"] == "updated"
+    task_running = await mock_storage.get_task(task_id)
+    assert task_running["status"] == "running"
+    # Ensure it's not marked as completed in the server's memory set
+    assert task_id not in server.completed_tasks
+
+    # Update status to completed
+    update_completed = await server.update_task(task_id=task_id, status="completed")
+    assert update_completed["status"] == "updated"
+    task_completed = await mock_storage.get_task(task_id)
+    assert task_completed["status"] == "completed"
+    # Check if added to completed_tasks set in server memory (should be managed by storage implicitly, but good to verify)
+    # The `mark_task_completed` in storage should handle this, and `is_task_completed` uses storage.
+    # However, `propagate_task_completion` directly uses `is_task_completed` which uses storage.
+    # The server's internal `self.completed_tasks` set might be redundant if storage handles it.
+    # For now, we rely on `is_task_completed` using storage. If `update_task` calls `mark_task_completed` properly, this is covered.
+
+    # Test updating status from completed back to pending
+    update_pending = await server.update_task(task_id=task_id, status="pending")
+    assert update_pending["status"] == "updated"
+    task_pending = await mock_storage.get_task(task_id)
+    assert task_pending["status"] == "pending"
+    # Verify it's removed from completed_tasks set
+    assert task_id not in server.completed_tasks
 
 # Test start_task (internal method, indirectly tested via create_task and update_task)
 @pytest.mark.asyncio

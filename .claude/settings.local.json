@@ -1,7 +1,16 @@
 {
   "permissions": {
     "allow": [
-      "Bash(python:*)"
+      "Bash(python:*)",
+      "Bash(find:*)",
+      "Bash(pip show:*)",
+      "Bash(grep:*)",
+      "Bash(PYTHONPATH=src python3 tasks/main.py --help 2 >& 1)",
+      "Bash(source:*)",
+      "Bash(PYTHONPATH=src python3 -c \"from tasks.main import app; print(''FastAPI app loaded successfully'')\")",
+      "Bash(pkill:*)",
+      "Bash(curl:*)",
+      "Bash(mkdir:*)"
     ],
     "deny": []
   }

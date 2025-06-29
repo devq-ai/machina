@@ -16,7 +16,6 @@ Successfully implemented the second batch of 8 production-ready MCP servers as r
 - github-mcp
 - memory-mcp
 - logfire-mcp
-- shopify-dev-mcp (already implemented in batch 1)
 
 All servers are built with production-quality code, real SDK integrations, comprehensive error handling, and full MCP protocol compliance.
 

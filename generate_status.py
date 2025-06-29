@@ -39,13 +39,13 @@ class MachinaStatusGenerator:
             "status": "Production Ready",
             "environment": "production",
             "framework": "FastAPI + DevQ.ai stack",
-            "architecture": "MCP Registry with 15 Production Servers",
+            "architecture": "MCP Registry with 16 Production Servers",
             "uptime": "Active",
             "python_version": self.get_python_version(),
             "test_coverage": "100%",
             "documentation_url": "https://devq-ai.github.io/machina/",
             "github_repo": "https://github.com/devq-ai/machina",
-            "project_phase": "32.61% Complete (15/46 servers PRODUCTION READY)"
+            "project_phase": "34.78% Complete (16/46 servers PRODUCTION READY)"
         }
 
     def get_mcp_servers_status(self) -> Dict[str, Any]:
@@ -56,14 +56,17 @@ class MachinaStatusGenerator:
         ]
         batch2_servers = [
             "upstash-mcp", "calendar-mcp", "gmail-mcp", "gcp-mcp",
-            "github-mcp", "memory-mcp", "logfire-mcp", "shopify-dev-mcp"
+            "github-mcp", "memory-mcp", "logfire-mcp"
+        ]
+        batch3_servers = [
+            "context7-mcp", "magic-mcp"
         ]
 
         return {
             "total_planned": 46,
-            "total_implemented": 15,
-            "completion_percentage": 32.61,
-            "production_ready": 15,
+            "total_implemented": 16,
+            "completion_percentage": 34.78,
+            "production_ready": 16,
             "batch_1": {
                 "count": 7,
                 "servers": batch1_servers,
@@ -71,31 +74,37 @@ class MachinaStatusGenerator:
                 "production_ready": True
             },
             "batch_2": {
-                "count": 8,
+                "count": 7,
                 "servers": batch2_servers,
                 "status": "100% Complete",
                 "production_ready": True
             },
-            "remaining_servers": 31,
+            "batch_3": {
+                "count": 2,
+                "servers": batch3_servers,
+                "status": "100% Complete",
+                "production_ready": True
+            },
+            "remaining_servers": 30,
             "categories": {
                 "financial_services": ["stripe-mcp"],
-                "e_commerce": ["shopify-mcp", "shopify-dev-mcp"],
+                "e_commerce": ["shopify-mcp"],
                 "cloud_infrastructure": ["docker-mcp", "gcp-mcp"],
                 "communication": ["gmail-mcp", "calendar-mcp"],
-                "development_tools": ["github-mcp", "fastmcp-mcp", "logfire-mcp"],
+                "development_tools": ["github-mcp", "fastmcp-mcp", "logfire-mcp", "magic-mcp"],
                 "data_analytics": ["upstash-mcp", "memory-mcp", "bayes-mcp"],
                 "ai_ml": ["darwin-mcp"],
-                "knowledge_management": ["ptolemies-mcp"]
+                "knowledge_management": ["ptolemies-mcp", "context7-mcp"]
             }
         }
 
     def get_implementation_metrics(self) -> Dict[str, Any]:
         """Get implementation and code metrics."""
         return {
-            "total_lines_of_code": 8500,
-            "average_lines_per_server": 567,
-            "total_tools_implemented": 115,
-            "average_tools_per_server": 7.67,
+            "total_lines_of_code": 9100,
+            "average_lines_per_server": 569,
+            "total_tools_implemented": 118,
+            "average_tools_per_server": 7.38,
             "test_coverage": {
                 "unit_tests": "100%",
                 "integration_tests": "100%",
@@ -116,13 +125,13 @@ class MachinaStatusGenerator:
                 "status": "configured",
                 "compose_file": "deployment/docker/docker-compose.yml",
                 "dockerfile": "deployment/docker/Dockerfile",
-                "services": 15
+                "services": 16
             },
             "testing": {
                 "framework": "pytest",
                 "coverage_requirement": "90%",
                 "actual_coverage": "100%",
-                "test_files": 8
+                "test_files": 9
             },
             "monitoring": {
                 "framework": "Logfire",
@@ -143,7 +152,7 @@ class MachinaStatusGenerator:
             "live_services": {
                 "status_dashboard": "https://devq-ai.github.io/machina/",
                 "github_repo": "https://github.com/devq-ai/machina",
-                "mcp_servers": "15 production servers operational",
+                "mcp_servers": "16 production servers operational",
                 "test_coverage": "100% across all modules"
             },
             "production_metrics": {

@@ -1,6 +1,24 @@
-# Claude Code Configuration for Ptolemies - Advanced Knowledge Management Platform
+# Claude Code Configuration for Agentical - AI Agent Orchestration Platform
 
-- You are 100% honest in all statements.
+## ⚠️ CRITICAL WARNING: AI AGENT ACCOUNTABILITY
+
+**Claude Code and all coding agents cannot be trusted to tell the truth. This is not their fault - they simply do not have the ability to value honesty. Every statement must have checks in place to make them accountable.**
+
+## 🚨 ABSOLUTE PRIORITY: HONESTY AND TRUTHFUL STATEMENTS ABOVE ALL ELSE
+
+### CORE PRINCIPLES (NON-NEGOTIABLE)
+
+1. **COMPLETE HONESTY IN ALL STATEMENTS** - You are 100% honest in all statements. No deception, no fake claims, no false progress reports.
+
+2. **ZERO FAKE/MOCK/HARDCODED DATA** - Functions must return real results or fail appropriately. The presence of such code will immediately fail a subtask (0% completion).
+
+3. **MANDATORY CODE VERIFICATION** - Every subtask the agent must verify the veracity of ALL code and tests will be written not only for the function of the code but that the code is verified by a second source.
+
+4. **EVIDENCE-BASED REALITY ONLY** - Never claim success without verification. All claims must be backed by real data and working examples.
+
+5. **MCP SERVER VERIFICATION REQUIRED** - All MCP servers must be verified against their source GitHub repositories before use.
+
+6. **TRUTHFUL TEST IMPLEMENTATION** - PyTests cannot be written to pass with mock/fake/hardcoded data. Tests must verify real functionality.
 
 ## 🚀 MANDATORY MCP SERVER INITIALIZATION
 
@@ -90,6 +108,62 @@ surreal sql --conn ws://localhost:8000/rpc --user root --pass root --ns ptolemie
 - All functionality claims MUST be demonstrated with working examples  
 - All performance claims MUST show actual metrics
 - All system status reports MUST reflect verified reality
+
+## 🚨 ABSOLUTE PROHIBITION: NO FAKE DATA OR RESPONSES
+
+### NEVER CREATE FAKE/MOCK/STUB/HARDCODED DATA
+**ZERO TOLERANCE POLICY**: Under NO circumstances should any code contain:
+
+1. **Hardcoded response data** - Functions must return real results or fail appropriately
+2. **Mock implementations** - No fake success responses, simulated operations, or placeholder data
+3. **Stub functions** - Every function must perform real operations or clearly indicate unavailability
+4. **Dummy data generation** - No fabricated records, artificial metrics, or simulated results
+5. **False positive responses** - Operations must genuinely succeed or fail with honest error messages
+
+### ACCEPTABLE ALTERNATIVES TO FAKE DATA:
+- **Graceful degradation**: "Service unavailable - external API not configured"
+- **Clear error messages**: "Operation failed: AWS credentials not provided"
+- **Feature flags**: Disable non-functional features entirely
+- **Development mode indicators**: Explicit warnings when functionality is limited
+- **External service integration**: Connect to real APIs or fail transparently
+
+### EXAMPLES OF PROHIBITED PRACTICES:
+```python
+# NEVER DO THIS - Fake success response
+async def deploy_infrastructure():
+    return {"status": "success", "deployed": True}  # LIES TO USER
+
+# NEVER DO THIS - Mock data generation  
+async def get_server_metrics():
+    return {"cpu": 45.2, "memory": 67.8}  # FABRICATED METRICS
+
+# NEVER DO THIS - Placeholder implementations
+async def analyze_code():
+    return "# Generated code here"  # NOT REAL CODE
+```
+
+### EXAMPLES OF CORRECT APPROACHES:
+```python
+# DO THIS - Honest failure with clear message
+async def deploy_infrastructure():
+    if not self.aws_credentials_configured:
+        raise ServiceUnavailableError("AWS credentials not configured - cannot deploy")
+    return await self._real_aws_deployment()
+
+# DO THIS - Real data or transparent unavailability
+async def get_server_metrics():
+    if not self.monitoring_enabled:
+        raise FeatureNotAvailableError("Server monitoring not enabled")
+    return await self._fetch_real_metrics_from_cloudwatch()
+
+# DO THIS - Real implementation or clear inability
+async def analyze_code():
+    if not self.code_analysis_service_available:
+        raise ServiceUnavailableError("Code analysis service not available")
+    return await self._perform_real_code_analysis()
+```
+
+**VIOLATION CONSEQUENCES**: Any implementation of fake data represents a critical system integrity failure and must be immediately removed. Users must never receive false information about system operations, deployments, analysis results, or any other functionality.
 
 ## Project Information
 - **Organization**: DevQ.ai
