@@ -1,11 +1,11 @@
 # 🚀 Machina - Production-Ready MCP Registry Platform
 
 ![Production Ready](https://img.shields.io/badge/Status-Production%20Ready-brightgreen)
-![MCP Servers](https://img.shields.io/badge/MCP%20Servers-44%20Total%20(34%20Online)-blue)
+![MCP Servers](https://img.shields.io/badge/MCP%20Servers-46%20Total%20(35%20Online)-blue)
 ![Test Coverage](https://img.shields.io/badge/Coverage-100%25-success)
 ![Python](https://img.shields.io/badge/Python-3.12-blue)
 
-**Machina** is DevQ.ai's **PRODUCTION-READY** MCP (Model Context Protocol) Registry and Management Platform, successfully orchestrating 44 MCP servers (34 online, 10 planned) with 100% test coverage and full production deployment capabilities.
+**Machina** is DevQ.ai's **PRODUCTION-READY** MCP (Model Context Protocol) Registry and Management Platform, successfully orchestrating 46 MCP servers (35 online, 11 planned) with 100% test coverage and full production deployment capabilities.
 
 ## 🎉 Production Announcement
 
@@ -13,7 +13,7 @@ We are thrilled to announce that **Machina v1.0.0 is now PRODUCTION READY!**
 
 ### ✅ Production Milestones Achieved
 
-- **44 MCP Servers** total (34 online, 10 planned for future implementation)
+- **46 MCP Servers** total (35 online, 11 planned for future implementation)
 - **100% Test Coverage** across all implemented servers
 - **100% Production Code** - zero mock implementations
 - **Docker Deployment** ready for immediate use
@@ -23,7 +23,7 @@ We are thrilled to announce that **Machina v1.0.0 is now PRODUCTION READY!**
 
 Here is the current status of the MCP servers:
 
-#### ✅ Online Servers (34)
+#### ✅ Online Servers (35)
 
 **Cloud & Infrastructure (4)**
 *   **`aws-core-mcp-server`**: AWS services integration
@@ -75,7 +75,10 @@ Here is the current status of the MCP servers:
 *   **`shadcn-ui-mcp-server`**: UI component library
 *   **`registry-mcp`**: Registry management server
 
-#### 🔄 Planned Servers (10)
+**Legal Services (1)**
+*   **`mcp-cerebra-legal`**: Enterprise-grade legal reasoning and analysis
+
+#### 🔄 Planned Servers (11)
 
 **Kept in registry for future implementation:**
 *   **`crawl4ai-mcp`**: Web content extraction and analysis

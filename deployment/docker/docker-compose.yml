@@ -230,6 +230,23 @@ services:
       - mcp-network
     restart: unless-stopped
 
+  # MCP Cerebra Legal Service
+  mcp-cerebra-legal:
+    build:
+      context: ../..
+      dockerfile: deployment/docker/Dockerfile
+    container_name: mcp-cerebra-legal
+    command: ["python", "-m", "mcp.mcp-servers.mcp-cerebra-legal.src.server"]
+    environment:
+      - MCP_SERVICE_NAME=mcp-cerebra-legal
+      - LOG_LEVEL=INFO
+      - NODE_ENV=production
+    ports:
+      - "8014:8000"
+    networks:
+      - mcp-network
+    restart: unless-stopped
+
   # Supporting Services
   redis:
     image: redis:7-alpine

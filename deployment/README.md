@@ -58,6 +58,7 @@ Simple deployment guide for running MCP servers with Docker Compose.
 | github-mcp | 8011 | GitHub repository management |
 | memory-mcp | 8012 | Persistent memory storage |
 | logfire-mcp | 8013 | Logfire observability |
+| mcp-cerebra-legal | 8014 | Enterprise legal reasoning and analysis |
 
 ## Testing
 

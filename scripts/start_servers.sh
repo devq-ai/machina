@@ -18,6 +18,7 @@ servers=(
     "gmail-mcp"
     "jupyter-mcp"
     "logfire-mcp"
+    "mcp-cerebra-legal"
     "memory-mcp"
     "mcp-server-buildkite"
     "mcp-server-github"
