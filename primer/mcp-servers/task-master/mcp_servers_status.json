@@ -1,0 +1,193 @@
+{
+  "timestamp": "2025-07-01T10:28:48.068967",
+  "total_servers": 37,
+  "configured_servers": 37,
+  "registry_status": "configured_for_startup",
+  "servers": [
+    {
+      "name": "agentql-mcp",
+      "port": 8001,
+      "status": "configured"
+    },
+    {
+      "name": "aws-core-mcp-server",
+      "port": 8002,
+      "status": "configured"
+    },
+    {
+      "name": "bayes-mcp",
+      "port": 8003,
+      "status": "configured"
+    },
+    {
+      "name": "brightdata-mcp",
+      "port": 8004,
+      "status": "configured"
+    },
+    {
+      "name": "browser-tools-context-server",
+      "port": 8005,
+      "status": "configured"
+    },
+    {
+      "name": "calendar-mcp",
+      "port": 8006,
+      "status": "configured"
+    },
+    {
+      "name": "context7-mcp",
+      "port": 8007,
+      "status": "configured"
+    },
+    {
+      "name": "darwin-mcp",
+      "port": 8008,
+      "status": "configured"
+    },
+    {
+      "name": "docker-mcp",
+      "port": 8009,
+      "status": "configured"
+    },
+    {
+      "name": "fastmcp-mcp",
+      "port": 8010,
+      "status": "configured"
+    },
+    {
+      "name": "gcp-mcp",
+      "port": 8011,
+      "status": "configured"
+    },
+    {
+      "name": "github-mcp",
+      "port": 8012,
+      "status": "configured"
+    },
+    {
+      "name": "gmail-mcp",
+      "port": 8013,
+      "status": "configured"
+    },
+    {
+      "name": "instagram-mcp",
+      "port": 8014,
+      "status": "configured"
+    },
+    {
+      "name": "jupyter-mcp",
+      "port": 8015,
+      "status": "configured"
+    },
+    {
+      "name": "logfire-mcp",
+      "port": 8016,
+      "status": "configured"
+    },
+    {
+      "name": "magic-mcp",
+      "port": 8017,
+      "status": "configured"
+    },
+    {
+      "name": "mcp-cerebra-legal",
+      "port": 8018,
+      "status": "configured"
+    },
+    {
+      "name": "memory-mcp",
+      "port": 8019,
+      "status": "configured"
+    },
+    {
+      "name": "postgres-mcp",
+      "port": 8020,
+      "status": "configured"
+    },
+    {
+      "name": "ptolemies-mcp-server",
+      "port": 8021,
+      "status": "configured"
+    },
+    {
+      "name": "pulumi-mcp-server",
+      "port": 8022,
+      "status": "configured"
+    },
+    {
+      "name": "puppeteer-mcp",
+      "port": 8023,
+      "status": "configured"
+    },
+    {
+      "name": "redis-mcp",
+      "port": 8024,
+      "status": "configured"
+    },
+    {
+      "name": "scholarly-mcp",
+      "port": 8025,
+      "status": "configured"
+    },
+    {
+      "name": "shadcn-ui-mcp-server",
+      "port": 8026,
+      "status": "configured"
+    },
+    {
+      "name": "shopify-mcp",
+      "port": 8027,
+      "status": "configured"
+    },
+    {
+      "name": "slack-mcp",
+      "port": 8028,
+      "status": "configured"
+    },
+    {
+      "name": "solver-mzn-mcp",
+      "port": 8029,
+      "status": "configured"
+    },
+    {
+      "name": "solver-pysat-mcp",
+      "port": 8030,
+      "status": "configured"
+    },
+    {
+      "name": "solver-z3-mcp",
+      "port": 8031,
+      "status": "configured"
+    },
+    {
+      "name": "stripe-mcp",
+      "port": 8032,
+      "status": "configured"
+    },
+    {
+      "name": "surrealdb-mcp",
+      "port": 8033,
+      "status": "configured"
+    },
+    {
+      "name": "task-master",
+      "port": 8034,
+      "status": "configured"
+    },
+    {
+      "name": "time-mcp",
+      "port": 8035,
+      "status": "configured"
+    },
+    {
+      "name": "upstash-mcp",
+      "port": 8036,
+      "status": "configured"
+    },
+    {
+      "name": "wikidata-mcp",
+      "port": 8037,
+      "status": "configured"
+    }
+  ]
+}

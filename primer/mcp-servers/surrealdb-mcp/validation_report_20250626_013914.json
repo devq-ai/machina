@@ -1,0 +1,89 @@
+{
+  "summary": {
+    "total_tests": 11,
+    "passed": 3,
+    "failed": 8,
+    "success_rate": 27.27272727272727,
+    "total_duration": 4.9114227294921875e-05,
+    "timestamp": "2025-06-26T06:39:14.259293"
+  },
+  "test_results": [
+    {
+      "test": "Environment Setup",
+      "success": true,
+      "message": "Environment variables: {'SURREALDB_URL': True, 'SURREALDB_USERNAME': True, 'SURREALDB_PASSWORD': True}",
+      "duration": 5.0067901611328125e-06,
+      "timestamp": "2025-06-26T06:39:14.259048"
+    },
+    {
+      "test": "SurrealDB Connection",
+      "success": false,
+      "message": "SurrealDB not connected (likely no server running)",
+      "duration": 9.5367431640625e-07,
+      "timestamp": "2025-06-26T06:39:14.259062"
+    },
+    {
+      "test": "Server Status",
+      "success": true,
+      "message": "All status fields present: ['server', 'version', 'timestamp', 'connected', 'namespace', 'database']",
+      "duration": 3.314018249511719e-05,
+      "timestamp": "2025-06-26T06:39:14.259101"
+    },
+    {
+      "test": "Document Operations",
+      "success": false,
+      "message": "Skipped - SurrealDB not connected",
+      "duration": 0.0,
+      "timestamp": "2025-06-26T06:39:14.259109"
+    },
+    {
+      "test": "Graph Operations",
+      "success": false,
+      "message": "Skipped - SurrealDB not connected",
+      "duration": 0.0,
+      "timestamp": "2025-06-26T06:39:14.259114"
+    },
+    {
+      "test": "Key-Value Operations",
+      "success": false,
+      "message": "Skipped - SurrealDB not connected",
+      "duration": 0.0,
+      "timestamp": "2025-06-26T06:39:14.259118"
+    },
+    {
+      "test": "Query Execution",
+      "success": false,
+      "message": "Skipped - SurrealDB not connected",
+      "duration": 9.5367431640625e-07,
+      "timestamp": "2025-06-26T06:39:14.259242"
+    },
+    {
+      "test": "Table Operations",
+      "success": false,
+      "message": "Skipped - SurrealDB not connected",
+      "duration": 0.0,
+      "timestamp": "2025-06-26T06:39:14.259249"
+    },
+    {
+      "test": "Database Info",
+      "success": false,
+      "message": "Skipped - SurrealDB not connected",
+      "duration": 0.0,
+      "timestamp": "2025-06-26T06:39:14.259254"
+    },
+    {
+      "test": "Error Handling",
+      "success": false,
+      "message": "Passed 0/3 error handling tests",
+      "duration": 9.059906005859375e-06,
+      "timestamp": "2025-06-26T06:39:14.259267"
+    },
+    {
+      "test": "Cleanup",
+      "success": true,
+      "message": "Test data cleanup completed",
+      "duration": 0.0,
+      "timestamp": "2025-06-26T06:39:14.259274"
+    }
+  ]
+}

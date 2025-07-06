@@ -1,0 +1,38 @@
+# SurrealDB MCP Server Dependencies
+# Multi-model database server with graph, document, and key-value capabilities
+
+# Core MCP Framework
+mcp>=1.0.0
+
+# SurrealDB Python Client
+surrealdb>=0.3.0
+
+# Async WebSocket Support
+websockets>=12.0.0
+
+# Data Validation
+pydantic>=2.5.0
+
+# Async HTTP Client
+httpx>=0.25.0
+
+# File Operations
+aiofiles>=23.2.0
+
+# Date/Time Utilities
+python-dateutil>=2.8.0
+
+# JSON Processing
+orjson>=3.9.0
+
+# Development Dependencies
+pytest>=7.4.0
+pytest-asyncio>=0.21.0
+pytest-mock>=3.11.0
+
+# Optional: For local development without SurrealDB
+# Add mock SurrealDB client if needed
+responses>=0.23.0
+
+# Logging and Monitoring
+structlog>=23.1.0

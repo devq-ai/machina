@@ -1,0 +1,89 @@
+{
+  "summary": {
+    "total_tests": 11,
+    "passed": 11,
+    "failed": 0,
+    "success_rate": 100.0,
+    "total_duration": 0.0003268718719482422,
+    "timestamp": "2025-06-26T06:41:25.748630"
+  },
+  "test_results": [
+    {
+      "test": "Environment Setup",
+      "success": true,
+      "message": "Environment variables: {'SURREALDB_URL': True, 'SURREALDB_USERNAME': True, 'SURREALDB_PASSWORD': True}",
+      "duration": 4.0531158447265625e-06,
+      "timestamp": "2025-06-26T06:41:25.748199"
+    },
+    {
+      "test": "SurrealDB Connection",
+      "success": true,
+      "message": "SurrealDB connection successful",
+      "duration": 2.1457672119140625e-06,
+      "timestamp": "2025-06-26T06:41:25.748215"
+    },
+    {
+      "test": "Server Status",
+      "success": true,
+      "message": "All status fields present: ['server', 'version', 'timestamp', 'connected', 'namespace', 'database', 'database_info', 'query_test', 'mock_mode']",
+      "duration": 3.910064697265625e-05,
+      "timestamp": "2025-06-26T06:41:25.748260"
+    },
+    {
+      "test": "Document Operations",
+      "success": true,
+      "message": "CRUD operations completed successfully",
+      "duration": 7.200241088867188e-05,
+      "timestamp": "2025-06-26T06:41:25.748340"
+    },
+    {
+      "test": "Graph Operations",
+      "success": true,
+      "message": "Graph operations completed successfully",
+      "duration": 7.43865966796875e-05,
+      "timestamp": "2025-06-26T06:41:25.748422"
+    },
+    {
+      "test": "Key-Value Operations",
+      "success": true,
+      "message": "Key-value operations completed successfully",
+      "duration": 4.601478576660156e-05,
+      "timestamp": "2025-06-26T06:41:25.748479"
+    },
+    {
+      "test": "Query Execution",
+      "success": true,
+      "message": "Query execution completed successfully",
+      "duration": 2.8133392333984375e-05,
+      "timestamp": "2025-06-26T06:41:25.748515"
+    },
+    {
+      "test": "Table Operations",
+      "success": true,
+      "message": "Table operations completed - found 3 tables",
+      "duration": 2.6226043701171875e-05,
+      "timestamp": "2025-06-26T06:41:25.748547"
+    },
+    {
+      "test": "Database Info",
+      "success": true,
+      "message": "Database info retrieved successfully",
+      "duration": 2.09808349609375e-05,
+      "timestamp": "2025-06-26T06:41:25.748584"
+    },
+    {
+      "test": "Error Handling",
+      "success": true,
+      "message": "Passed 3/3 error handling tests",
+      "duration": 1.2874603271484375e-05,
+      "timestamp": "2025-06-26T06:41:25.748604"
+    },
+    {
+      "test": "Cleanup",
+      "success": true,
+      "message": "Test data cleanup completed",
+      "duration": 9.5367431640625e-07,
+      "timestamp": "2025-06-26T06:41:25.748610"
+    }
+  ]
+}
