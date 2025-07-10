@@ -1,0 +1,138 @@
+{
+  "timestamp": "2025-07-10T01:13:16.121171",
+  "total_servers": 13,
+  "verified_servers": 13,
+  "failed_servers": 0,
+  "servers": {
+    "context7-mcp": {
+      "file_exists": true,
+      "class_importable": true,
+      "registry_integrated": true,
+      "instantiable": true,
+      "instrumentation": "fastmcp",
+      "description": "advanced context management and semantic search with vector embeddings",
+      "repo": "https://github.com/upstash/context7",
+      "status": "passed"
+    },
+    "crawl4ai-mcp": {
+      "file_exists": true,
+      "class_importable": true,
+      "registry_integrated": true,
+      "instantiable": true,
+      "instrumentation": "fastmcp",
+      "description": "web crawling and rag capabilities for ai agents and ai coding assistants",
+      "repo": "https://github.com/coleam00/mcp-crawl4ai-rag",
+      "status": "passed"
+    },
+    "docker-mcp": {
+      "file_exists": true,
+      "class_importable": true,
+      "registry_integrated": true,
+      "instantiable": true,
+      "instrumentation": "uv-python",
+      "description": "an mcp server for managing docker with natural language",
+      "repo": "https://github.com/QuantGeekDev/docker-mcp",
+      "status": "passed"
+    },
+    "fastapi-mcp": {
+      "file_exists": true,
+      "class_importable": true,
+      "registry_integrated": true,
+      "instantiable": true,
+      "instrumentation": "fastmcp",
+      "description": "an mcp for the best web framework",
+      "repo": "https://pypi.org/project/fastmcp/1.0/",
+      "status": "passed"
+    },
+    "fastmcp-mcp": {
+      "file_exists": true,
+      "class_importable": true,
+      "registry_integrated": true,
+      "instantiable": true,
+      "instrumentation": "fastmcp",
+      "description": "fast development for mcp",
+      "repo": "https://github.com/jlowin/fastmcp",
+      "status": "passed"
+    },
+    "github-mcp": {
+      "file_exists": true,
+      "class_importable": true,
+      "registry_integrated": true,
+      "instantiable": true,
+      "instrumentation": "typescript-npm",
+      "description": "github api integration for repository management, issues, and pull requests",
+      "repo": "https://github.com/docker/mcp-servers/tree/main/src/github",
+      "status": "passed"
+    },
+    "logfire-mcp": {
+      "file_exists": true,
+      "class_importable": true,
+      "registry_integrated": true,
+      "instantiable": true,
+      "instrumentation": "mcp-python",
+      "description": "integrated observability and logging with structured monitoring",
+      "repo": "https://github.com/pydantic/logfire-mcp",
+      "status": "passed"
+    },
+    "memory-mcp": {
+      "file_exists": true,
+      "class_importable": true,
+      "registry_integrated": true,
+      "instantiable": true,
+      "instrumentation": "mcp-typescript",
+      "description": "persistent memory management with",
+      "repo": "https://github.com/modelcontextprotocol/servers/tree/main/src/memory",
+      "status": "passed"
+    },
+    "pydantic-ai-mcp": {
+      "file_exists": true,
+      "class_importable": true,
+      "registry_integrated": true,
+      "instantiable": true,
+      "instrumentation": "fastmcp-mcp",
+      "description": "an mcp for best testing framework",
+      "repo": "https://ai.pydantic.dev/mcp/",
+      "status": "passed"
+    },
+    "pytest-mcp": {
+      "file_exists": true,
+      "class_importable": true,
+      "registry_integrated": true,
+      "instantiable": true,
+      "instrumentation": "mcp-typescript",
+      "description": "an mcp for best testing framework",
+      "repo": "https://mcp.so/server/pytest-mcp-server/tosin2013?tab=content",
+      "status": "passed"
+    },
+    "registry-mcp": {
+      "file_exists": true,
+      "class_importable": true,
+      "registry_integrated": true,
+      "instantiable": true,
+      "instrumentation": "custom-stdio",
+      "description": "official mcp server registry with discovery and installation tools",
+      "repo": "https://github.com/modelcontextprotocol/registry",
+      "status": "passed"
+    },
+    "sequential-thinking-mcp": {
+      "file_exists": true,
+      "class_importable": true,
+      "registry_integrated": true,
+      "instantiable": true,
+      "instrumentation": "mcp-python",
+      "description": "sequential reasoning capabilities for complex problem-solving workflows",
+      "repo": "https://github.com/loamstudios/zed-mcp-server-sequential-thinking",
+      "status": "passed"
+    },
+    "surrealdb-mcp": {
+      "file_exists": true,
+      "class_importable": true,
+      "registry_integrated": true,
+      "instantiable": true,
+      "instrumentation": "mcp-typescript",
+      "description": "surrealdb multi-model database integration with graph capabilities",
+      "repo": "https://github.com/nsxdavid/surrealdb-mcp-server",
+      "status": "passed"
+    }
+  }
+}

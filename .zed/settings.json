@@ -271,10 +271,11 @@
         "-m",
         "context7_mcp.server"
       ],
-      "cwd": "/Users/dionedge/devqai/mcp/mcp-servers/context7-mcp",
+      "cwd": "/Users/dionedge/devqai/machina/primer/mcp-servers/context7-mcp",
       "env": {
         "UPSTASH_REDIS_REST_URL": "${UPSTASH_REDIS_REST_URL}",
         "UPSTASH_REDIS_REST_TOKEN": "${UPSTASH_REDIS_REST_TOKEN}",
+        "OPENAI_API_KEY": "${OPENAI_API_KEY}",
         "PYTHONPATH": "/Users/dionedge/devqai:$PYTHONPATH"
       }
     },
@@ -394,6 +395,19 @@
       "env": {
         "PYTHONPATH": "/Users/dionedge/devqai/machina/src",
         "MCP_DEBUG": "false"
+      }
+    },
+    "logfire": {
+      "command": "python",
+      "args": [
+        "-m",
+        "logfire_mcp.server"
+      ],
+      "cwd": "/Users/dionedge/devqai/machina/primer/mcp-servers/logfire-mcp",
+      "env": {
+        "LOGFIRE_WRITE_TOKEN": "${LOGFIRE_WRITE_TOKEN}",
+        "LOGFIRE_READ_TOKEN": "${LOGFIRE_READ_TOKEN}",
+        "PYTHONPATH": "/Users/dionedge/devqai:$PYTHONPATH"
       }
     }
   }

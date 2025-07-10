@@ -73,31 +73,49 @@ class MCPRegistry:
 
         @self.fastmcp.tool(
             name="register_server",
-            description="Register a new MCP server with the registry",
+            description="Register a new MCP server in the registry",
             input_schema={
                 "type": "object",
                 "properties": {
                     "name": {"type": "string", "description": "Server name"},
-                    "endpoint": {"type": "string", "description": "Server endpoint URL or address"},
-                    "tools": {"type": "array", "items": {"type": "string"}, "description": "List of tool names"},
-                    "version": {"type": "string", "description": "Server version", "default": "1.0.0"},
-                    "description": {"type": "string", "description": "Server description", "default": ""}
+                    "endpoint": {"type": "string", "description": "Server endpoint URL"},
+                    "tools": {"type": "array", "items": {"type": "string"}, "description": "List of tools"},
+                    "version": {"type": "string", "description": "Server version"},
+                    "description": {"type": "string", "description": "Server description"},
+                    "framework": {"type": "string", "description": "Server framework"},
+                    "status": {"type": "string", "description": "Server status"},
+                    "category": {"type": "string", "description": "Server category"},
+                    "health_check": {"type": "string", "description": "Health check method"},
+                    "environment_vars": {"type": "array", "items": {"type": "string"}, "description": "Required environment variables"}
                 },
                 "required": ["name", "endpoint", "tools"]
             }
         )
         async def register_server(name: str, endpoint: str, tools: List[str],
-                                version: str = "1.0.0", description: str = "") -> Dict[str, Any]:
+                                version: str = "1.0.0", description: str = "",
+                                framework: str = "FastMCP", status: str = "registered",
+                                category: str = "general", health_check: str = "default",
+                                environment_vars: List[str] = None) -> Dict[str, Any]:
             """Register a new MCP server"""
             with self.logger.span("register_server", server_name=name):
                 try:
+                    # Handle environment_vars default
+                    if environment_vars is None:
+                        environment_vars = []
+
                     server_info = MCPServerInfo(
                         name=name,
                         endpoint=endpoint,
                         tools=tools,
                         version=version,
                         description=description,
-                        status="registered"
+                        status=status,
+                        metadata={
+                            "framework": framework,
+                            "category": category,
+                            "health_check": health_check,
+                            "environment_vars": environment_vars
+                        }
                     )
 
                     self.servers[name] = server_info

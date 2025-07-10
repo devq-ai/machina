@@ -1,0 +1,107 @@
+{
+  "server_info": {
+    "name": "logfire-mcp",
+    "version": "1.0.0",
+    "initialization_time": 0.0027980804443359375,
+    "prometheus_metrics": 6,
+    "default_alerts": 4,
+    "health_checks": 5
+  },
+  "tests": [
+    {
+      "name": "Server Initialization",
+      "status": "PASSED",
+      "details": "Server initialized with all required components",
+      "timestamp": "2025-07-10T03:35:35.560485"
+    },
+    {
+      "name": "Prometheus Setup",
+      "status": "PASSED",
+      "details": "All 6 Prometheus metrics configured correctly",
+      "timestamp": "2025-07-10T03:35:35.560637"
+    },
+    {
+      "name": "Metrics Collection",
+      "status": "PASSED",
+      "details": "Metrics collection working correctly",
+      "timestamp": "2025-07-10T03:35:35.604603"
+    },
+    {
+      "name": "Metrics Querying",
+      "status": "PASSED",
+      "details": "Metrics querying with aggregation and filtering works",
+      "timestamp": "2025-07-10T03:35:35.606228"
+    },
+    {
+      "name": "Health Checks",
+      "status": "PASSED",
+      "details": "Health checks working for system and endpoints",
+      "timestamp": "2025-07-10T03:35:36.616561"
+    },
+    {
+      "name": "Alert Management",
+      "status": "PASSED",
+      "details": "Alert creation, management, and evaluation working",
+      "timestamp": "2025-07-10T03:35:36.632838"
+    },
+    {
+      "name": "System Overview",
+      "status": "PASSED",
+      "details": "System overview generation working correctly",
+      "timestamp": "2025-07-10T03:35:36.703648"
+    },
+    {
+      "name": "Metrics Export",
+      "status": "PASSED",
+      "details": "Metrics export working for JSON, Prometheus, and CSV formats",
+      "timestamp": "2025-07-10T03:35:36.712120"
+    },
+    {
+      "name": "Background Tasks",
+      "status": "PASSED",
+      "details": "Background task functionality working correctly",
+      "timestamp": "2025-07-10T03:35:36.714309"
+    },
+    {
+      "name": "Error Handling",
+      "status": "PASSED",
+      "details": "Error handling works correctly for invalid inputs",
+      "timestamp": "2025-07-10T03:35:36.716104"
+    },
+    {
+      "name": "Performance Validation",
+      "status": "PASSED",
+      "details": "Performance acceptable (status: 0.000s, collection: 0.056s)",
+      "timestamp": "2025-07-10T03:35:37.778030"
+    },
+    {
+      "name": "MCP Protocol Compliance",
+      "status": "PASSED",
+      "details": "MCP protocol compliance verified",
+      "timestamp": "2025-07-10T03:35:37.779013"
+    }
+  ],
+  "performance": {
+    "status_response_time": 7.176399230957031e-05,
+    "metrics_collection_time": 0.056227684020996094,
+    "health_check_time": 1.0055501461029053,
+    "memory_efficient": true,
+    "concurrent_capable": true
+  },
+  "compliance": {
+    "mcp_protocol": "compliant",
+    "tool_schemas": "valid",
+    "type_safety": "enforced",
+    "response_format": "json"
+  },
+  "summary": {
+    "overall_status": "PASSED",
+    "total_tests": 12,
+    "passed": 12,
+    "failed": 0,
+    "warnings": 0,
+    "success_rate": 100.0,
+    "total_time": 2.22,
+    "timestamp": "2025-07-10T03:35:37.779153"
+  }
+}

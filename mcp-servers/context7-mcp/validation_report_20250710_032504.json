@@ -1,0 +1,89 @@
+{
+  "summary": {
+    "total_tests": 11,
+    "passed": 11,
+    "failed": 0,
+    "success_rate": 100.0,
+    "total_duration": 0.5063207149505615,
+    "timestamp": "2025-07-10T08:25:04.665429"
+  },
+  "test_results": [
+    {
+      "test": "Environment Setup",
+      "success": true,
+      "message": "Environment variables: {'UPSTASH_REDIS_REST_URL': False, 'UPSTASH_REDIS_REST_TOKEN': False} (Will use local Redis if available)",
+      "duration": 1.71661376953125e-05,
+      "timestamp": "2025-07-10T08:25:04.158841"
+    },
+    {
+      "test": "Redis Connection",
+      "success": true,
+      "message": "Redis connection successful",
+      "duration": 0.00048804283142089844,
+      "timestamp": "2025-07-10T08:25:04.159354"
+    },
+    {
+      "test": "Embedding Model",
+      "success": true,
+      "message": "Generated 384-dimensional embedding",
+      "duration": 0.2281498908996582,
+      "timestamp": "2025-07-10T08:25:04.387527"
+    },
+    {
+      "test": "Server Status",
+      "success": true,
+      "message": "All status fields present: ['server', 'version', 'timestamp', 'redis_connected', 'embedding_model_loaded', 'tokenizer_initialized', 'redis_status']",
+      "duration": 0.0006639957427978516,
+      "timestamp": "2025-07-10T08:25:04.388225"
+    },
+    {
+      "test": "Document Storage",
+      "success": true,
+      "message": "Stored document test-doc-f91229d0-e230-49d7-9d68-0792ca1ccdc9 with 27 tokens",
+      "duration": 0.04078364372253418,
+      "timestamp": "2025-07-10T08:25:04.429025"
+    },
+    {
+      "test": "Document Retrieval",
+      "success": true,
+      "message": "Successfully retrieved document test-retrieve-e1428406-b090-45eb-8203-a02e727782fe",
+      "duration": 0.038484811782836914,
+      "timestamp": "2025-07-10T08:25:04.467523"
+    },
+    {
+      "test": "Semantic Search",
+      "success": true,
+      "message": "Found 5 relevant documents",
+      "duration": 0.13634514808654785,
+      "timestamp": "2025-07-10T08:25:04.603919"
+    },
+    {
+      "test": "Document Listing",
+      "success": true,
+      "message": "Listed 10 documents successfully",
+      "duration": 0.010747194290161133,
+      "timestamp": "2025-07-10T08:25:04.614682"
+    },
+    {
+      "test": "Context Statistics",
+      "success": true,
+      "message": "Stats: 12 docs, 156 tokens",
+      "duration": 0.0055348873138427734,
+      "timestamp": "2025-07-10T08:25:04.620236"
+    },
+    {
+      "test": "Error Handling",
+      "success": true,
+      "message": "Passed 3/3 error handling tests",
+      "duration": 0.04510498046875,
+      "timestamp": "2025-07-10T08:25:04.665381"
+    },
+    {
+      "test": "Cleanup",
+      "success": true,
+      "message": "Test data cleanup completed",
+      "duration": 9.5367431640625e-07,
+      "timestamp": "2025-07-10T08:25:04.665399"
+    }
+  ]
+}
