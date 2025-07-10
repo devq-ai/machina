@@ -7,7 +7,7 @@ Real MCP protocol implementation with AgentQL web automation
 import json
 import os
 import sys
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List
 import asyncio
 import logging
 
@@ -22,7 +22,6 @@ except ImportError:
     subprocess.run([sys.executable, "-m", "pip", "install", 
                    "mcp", "httpx", "playwright", "--break-system-packages"], 
                    capture_output=True)
-    import httpx
     from playwright.async_api import async_playwright
     from mcp.server import Server
     from mcp.server.stdio import stdio_server

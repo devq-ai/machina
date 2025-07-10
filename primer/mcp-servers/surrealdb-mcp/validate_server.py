@@ -19,9 +19,9 @@ import os
 import sys
 import time
 import uuid
-from datetime import datetime, timedelta
+from datetime import datetime
 from pathlib import Path
-from typing import Dict, List, Any
+from typing import Dict, Any
 
 # Add project root to path
 project_root = Path(__file__).parent.parent.parent.parent
@@ -684,7 +684,7 @@ class SurrealDBValidator:
                     self.log_test(
                         "Database Info",
                         True,
-                        f"Database info retrieved successfully",
+                        "Database info retrieved successfully",
                         time.time() - start_time
                     )
                     return True

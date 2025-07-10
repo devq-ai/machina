@@ -4,13 +4,9 @@ Instagram MCP Server Wrapper
 Wraps the existing TypeScript implementation with FastAPI health endpoint
 """
 
-import json
 import subprocess
 import sys
-import threading
-import time
 from datetime import datetime
-from pathlib import Path
 
 try:
     from fastapi import FastAPI, HTTPException
@@ -18,7 +14,7 @@ try:
     import uvicorn
 except ImportError:
     subprocess.run([sys.executable, "-m", "pip", "install", "fastapi", "uvicorn", "--break-system-packages"], capture_output=True)
-    from fastapi import FastAPI, HTTPException
+    from fastapi import FastAPI
     from fastapi.middleware.cors import CORSMiddleware
     import uvicorn
 
@@ -91,7 +87,7 @@ async def get_stats():
     }
 
 if __name__ == "__main__":
-    print(f"🚀 Starting Instagram MCP on port 8017")
+    print("🚀 Starting Instagram MCP on port 8017")
     uvicorn.run(
         "__main__:app",
         host="0.0.0.0",

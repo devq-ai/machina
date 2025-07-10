@@ -9,7 +9,6 @@ import json
 import sys
 import os
 from datetime import datetime
-from typing import Dict, Any
 
 # Add paths for imports
 sys.path.append(os.path.join(os.path.dirname(__file__), '../../ptolemies/python-server'))
@@ -119,7 +118,7 @@ async def test_ptolemies_server():
                     response_time = (datetime.now() - start_time).total_seconds() * 1000
                     print(f"✅ Initialization time: {response_time:.2f}ms")
 
-                print(f"\n✅ Ptolemies MCP Server: OPERATIONAL")
+                print("\n✅ Ptolemies MCP Server: OPERATIONAL")
                 print(f"   Total tools available: {len(tools)}")
                 return True
 

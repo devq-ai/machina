@@ -27,7 +27,7 @@ else
 fi
 echo "   Use mcp-inspect <server-name> for details"
 echo "🐍 Python: devq-setup, devq-clean, venv-* commands"
-echo "📋 Tasks: task-list, task-next, task-add, task-done, task-show"
+echo "📋 Tasks: task-next, task-add, task-done, task-show"
 echo "📁 Current directory: $(pwd)"
 
 # Check TaskMaster AI availability

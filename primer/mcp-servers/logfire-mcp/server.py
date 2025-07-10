@@ -14,8 +14,8 @@ import asyncio
 import json
 import logging
 import uuid
-from datetime import datetime, timedelta
-from typing import Dict, List, Any, Optional, Union, Set, Tuple
+from datetime import datetime
+from typing import Dict, List, Any, Optional, Set
 from pathlib import Path
 import sys
 import os
@@ -588,7 +588,7 @@ class LogfireMCPServer:
                 if source == "system":
                     await self._update_prometheus_metrics()
 
-                logfire.info(f"Metrics collected", source=source, count=collected_count)
+                logfire.info("Metrics collected", source=source, count=collected_count)
 
             return [types.TextContent(
                 type="text",
@@ -622,7 +622,7 @@ class LogfireMCPServer:
                     metric_name, start_time, end_time, tags, aggregation, group_by
                 )
 
-                logfire.info(f"Metrics queried", metric_name=metric_name, result_count=len(results))
+                logfire.info("Metrics queried", metric_name=metric_name, result_count=len(results))
 
             return [types.TextContent(
                 type="text",
@@ -657,7 +657,7 @@ class LogfireMCPServer:
                 else:
                     results = await self._check_target_health(target)
 
-                logfire.info(f"Health check completed", target=target, healthy_count=sum(1 for r in results if r.get("healthy", False)))
+                logfire.info("Health check completed", target=target, healthy_count=sum(1 for r in results if r.get("healthy", False)))
 
             return [types.TextContent(
                 type="text",
@@ -692,7 +692,7 @@ class LogfireMCPServer:
             self.alerts[alert_id] = alert
 
             with logfire.span("Create alert", alert_id=alert_id, name=alert.name):
-                logfire.info(f"Alert created", alert_id=alert_id, name=alert.name, severity=alert.severity)
+                logfire.info("Alert created", alert_id=alert_id, name=alert.name, severity=alert.severity)
 
             return [types.TextContent(
                 type="text",
@@ -744,7 +744,7 @@ class LogfireMCPServer:
                 else:
                     result = {"status": "error", "message": "Invalid action or missing alert_id"}
 
-                logfire.info(f"Alert management", action=action, alert_id=alert_id, result=result.get("status"))
+                logfire.info("Alert management", action=action, alert_id=alert_id, result=result.get("status"))
 
             return [types.TextContent(
                 type="text",
@@ -766,7 +766,7 @@ class LogfireMCPServer:
 
             with logfire.span("System overview", include_details=include_details):
                 overview = await self._generate_system_overview(include_details, time_range)
-                logfire.info(f"System overview generated", servers_monitored=len(overview.get("mcp_servers", {})))
+                logfire.info("System overview generated", servers_monitored=len(overview.get("mcp_servers", {})))
 
             return [types.TextContent(
                 type="text",
@@ -792,7 +792,7 @@ class LogfireMCPServer:
                 exported_data = await self._export_metrics(
                     export_format, metric_names, start_time, end_time
                 )
-                logfire.info(f"Metrics exported", format=export_format, metrics_count=len(metric_names) if metric_names else "all")
+                logfire.info("Metrics exported", format=export_format, metrics_count=len(metric_names) if metric_names else "all")
 
             return [types.TextContent(
                 type="text",
@@ -1329,7 +1329,7 @@ class LogfireMCPServer:
         logger.info("Starting Logfire MCP Server...")
 
         with logfire.span("Server startup"):
-            logger.info(f"Server components initialized:")
+            logger.info("Server components initialized:")
             logger.info(f"- Database: {'connected' if self.db_engine else 'not available'}")
             logger.info(f"- Redis: {'connected' if self.redis_client else 'not configured'}")
             logger.info(f"- InfluxDB: {'connected' if self.influx_client else 'not configured'}")

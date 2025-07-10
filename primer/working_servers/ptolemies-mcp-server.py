@@ -4,10 +4,8 @@ ptolemies-mcp-server MCP Server
 Production-ready implementation
 """
 
-import json
 import sys
 from datetime import datetime
-from pathlib import Path
 
 try:
     from fastapi import FastAPI, HTTPException
@@ -16,7 +14,7 @@ try:
 except ImportError:
     import subprocess
     subprocess.run([sys.executable, "-m", "pip", "install", "fastapi", "uvicorn", "--break-system-packages"], capture_output=True)
-    from fastapi import FastAPI, HTTPException
+    from fastapi import FastAPI
     from fastapi.middleware.cors import CORSMiddleware
     import uvicorn
 

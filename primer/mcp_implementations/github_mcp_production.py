@@ -23,8 +23,6 @@ except ImportError:
     subprocess.check_call(["pip", "install", "PyGithub"])
     from github import Github, GithubException
     from github.Repository import Repository
-    from github.PullRequest import PullRequest
-    from github.Issue import Issue
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)

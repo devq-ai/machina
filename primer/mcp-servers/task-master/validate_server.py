@@ -7,7 +7,6 @@ to ensure core functionality works correctly without requiring full MCP protocol
 """
 
 import asyncio
-import json
 import tempfile
 import os
 import sys

@@ -7,8 +7,6 @@ from typing import Dict, Any, List
 import mcp.types as types
 import subprocess
 import json
-import os
-import tempfile
 from pathlib import Path
 
 # Path to the Node.js server

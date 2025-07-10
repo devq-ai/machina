@@ -6,7 +6,6 @@ from typing import Dict, Any, List
 import mcp.types as types
 from datetime import datetime
 from jupyter_client import KernelManager
-import asyncio
 
 KERNELS = {}
 

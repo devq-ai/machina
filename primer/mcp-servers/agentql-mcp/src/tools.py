@@ -6,10 +6,8 @@ from typing import Dict, Any, List
 import mcp.types as types
 from datetime import datetime
 import agentql
-import asyncio
 import logging
 import os
-from playwright.async_api import async_playwright
 
 def get_tools() -> List[types.Tool]:
     """Define available tools"""

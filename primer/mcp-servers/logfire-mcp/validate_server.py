@@ -11,9 +11,9 @@ import asyncio
 import json
 import sys
 import time
-from datetime import datetime, timedelta
+from datetime import datetime
 from pathlib import Path
-from typing import Dict, List, Any, Optional
+from typing import Dict, Any, Optional
 import logging
 from unittest.mock import patch
 
@@ -719,7 +719,7 @@ class LogfireMCPValidator:
         # Print performance metrics
         if "performance" in self.validation_results:
             perf = self.validation_results["performance"]
-            print(f"\nPERFORMANCE METRICS:")
+            print("\nPERFORMANCE METRICS:")
             print(f"  - Status Response: {perf.get('status_response_time', 'N/A'):.3f}s")
             print(f"  - Metrics Collection: {perf.get('metrics_collection_time', 'N/A'):.3f}s")
             print(f"  - Health Check: {perf.get('health_check_time', 'N/A'):.3f}s")

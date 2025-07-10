@@ -5,7 +5,7 @@ MCP Tools Implementation
 from typing import Dict, Any, List
 import mcp.types as types
 from datetime import datetime
-from z3 import Solver, Int, Real, Bool, sat, unsat
+from z3 import Solver, Int, Real, Bool, sat
 
 # TODO: Replace with a real session store
 MODELS = {}

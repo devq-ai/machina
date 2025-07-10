@@ -7,7 +7,6 @@ import mcp.types as types
 from datetime import datetime
 from upstash_redis import Redis
 from sentence_transformers import SentenceTransformer
-import os
 
 def get_upstash_client():
     """Get an Upstash client."""

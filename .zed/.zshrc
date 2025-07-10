@@ -96,7 +96,7 @@ logfire-check() {
 alias taskmaster-check="npx task-master-ai --version"
 
 # DevQ.ai info display function (can be called manually)
-alias devq-info='$DEVQAI_ROOT/devgen/.zed/devq-info.sh'
+alias devq-info='.zed/devq-info.sh'
 
 # DevQ.ai environment reload function
 devq-reload() {
@@ -162,15 +162,6 @@ devq-setup() {
 }
 
 # TaskMaster AI integration functions
-task-list() {
-    echo "📋 Current TaskMaster AI tasks:"
-    if command -v task-master >/dev/null 2>&1; then
-        task-master list
-    else
-        npx task-master-ai list
-    fi
-}
-
 task-next() {
     echo "🎯 Next task to work on:"
     if command -v task-master >/dev/null 2>&1; then
@@ -272,12 +263,12 @@ start-crawl4ai() {
 mcp-inspect() {
     if [[ $# -eq 0 ]]; then
         echo "🔧 Available MCP servers:"
-        echo "  Core: taskmaster-ai, memory, filesystem, git, fetch, sequentialthinking"
+        echo "  Core: memory, filesystem, git, fetch, sequentialthinking"
         echo "  DevQ.ai: context7, ptolemies, bayes, surrealdb"
         echo "  Optional: crawl4ai, github, orchestrator, magic, shadcn-ui, registry"
         echo ""
         echo "Usage: mcp-inspect <server-name>"
-        echo "Example: mcp-inspect taskmaster-ai"
+        echo "Example: mcp-inspect memory"
         return 1
     fi
 
@@ -286,12 +277,7 @@ mcp-inspect() {
     echo ""
 
     case $server in
-        taskmaster-ai)
-            echo "📋 TaskMaster AI - Task management and workflow automation"
-            echo "Status: $(npx task-master-ai --version 2>/dev/null && echo '✅ Available' || echo '❌ Not available')"
-            echo "Type: NPM package"
-            echo "Usage: npx task-master-ai [command]"
-            ;;
+
         memory)
             echo "🧠 Memory - Persistent context management"
             echo "Status: $(npx @modelcontextprotocol/server-memory --version 2>/dev/null && echo '✅ Available' || echo '❌ Not available')"
@@ -402,7 +388,7 @@ get_required_mcp_servers() {
 
     # Fallback if first line method fails
     if [[ -z "$required_tools" ]]; then
-        required_tools="bayes, context7, fetch, filesystem, git, memory, ptolemies, sequentialthinking, surrealdb, taskmaster-ai"
+        required_tools="bayes, context7, fetch, filesystem, git, memory, ptolemies, sequentialthinking, surrealdb"
     fi
 
     echo "$required_tools"
@@ -416,7 +402,7 @@ devq_show_info() {
     echo "🔧 Required MCP Servers: $(get_required_mcp_servers)"
     echo "   Use mcp-inspect <server-name> for details"
     echo "🐍 Python: devq-setup, devq-clean, venv-* commands"
-    echo "📋 Tasks: task-list, task-next, task-add, task-done, task-show"
+    echo "📋 Tasks: task-next, task-add, task-done, task-show"
     echo "📁 Current directory: $(pwd)"
 
     # Quick health check

@@ -7,7 +7,6 @@ Tests the server startup and basic health check functionality
 import subprocess
 import json
 import time
-import os
 import sys
 from pathlib import Path
 

@@ -10,7 +10,17 @@
       "Bash(PYTHONPATH=src python3 -c \"from tasks.main import app; print(''FastAPI app loaded successfully'')\")",
       "Bash(pkill:*)",
       "Bash(curl:*)",
-      "Bash(mkdir:*)"
+      "Bash(mkdir:*)",
+      "WebFetch(domain:github.com)",
+      "Bash(git clone:*)",
+      "Bash(cp:*)",
+      "Bash(npm install)",
+      "Bash(npm run build:*)",
+      "Bash(ls:*)",
+      "Bash(pip install:*)",
+      "Bash(rm:*)",
+      "Bash(timeout 5 python3:*)",
+      "Bash(git add:*)"
     ],
     "deny": []
   }

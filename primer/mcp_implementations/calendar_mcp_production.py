@@ -8,12 +8,9 @@ import os
 import json
 import asyncio
 import logging
-from typing import Any, Dict, List, Optional, Union
+from typing import Any, Dict, List, Optional
 from datetime import datetime, timedelta, timezone
 from dateutil import parser
-import base64
-from email.mime.text import MIMEText
-import re
 
 try:
     from google.oauth2.credentials import Credentials

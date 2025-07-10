@@ -5,7 +5,6 @@ Tests both Python wrapper and Node.js backend integration
 
 import pytest
 import json
-import asyncio
 from unittest.mock import patch, MagicMock
 from pathlib import Path
 

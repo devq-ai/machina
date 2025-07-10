@@ -1,7 +1,5 @@
-import pytest
 from fastapi.testclient import TestClient
 from src.server import app
-import time
 
 client = TestClient(app)
 

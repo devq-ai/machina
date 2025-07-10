@@ -12,9 +12,7 @@ import json
 import sys
 import subprocess
 import tempfile
-import os
 from pathlib import Path
-import time
 
 async def test_imports():
     """Test that all required imports work"""

@@ -8,9 +8,8 @@ import os
 import json
 import asyncio
 import logging
-from typing import Any, Dict, List, Optional, Union
+from typing import Any, Dict, List, Optional
 from datetime import datetime, timezone
-import base64
 from pathlib import Path
 
 try:
@@ -27,7 +26,6 @@ except ImportError:
     from google.cloud import storage
     from google.cloud import bigquery
     from google.oauth2 import service_account
-    from google.api_core import exceptions
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)

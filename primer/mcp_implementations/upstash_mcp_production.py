@@ -8,10 +8,9 @@ import os
 import json
 import asyncio
 import logging
-from typing import Any, Dict, List, Optional, Union
+from typing import Any, Dict, List, Optional
 from datetime import datetime, timezone
 import hashlib
-import base64
 
 try:
     import httpx

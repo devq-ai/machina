@@ -13,13 +13,11 @@ async operations, structured logging, and robust error handling.
 import asyncio
 import json
 import logging
-import uuid
 from datetime import datetime, timedelta
-from typing import Dict, List, Any, Optional, Union, Set
+from typing import Dict, List, Any, Optional
 from pathlib import Path
 import sys
 import os
-from urllib.parse import urlparse
 
 # Add the project root to Python path
 project_root = Path(__file__).parent.parent.parent.parent

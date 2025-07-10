@@ -9,9 +9,8 @@ Combined test implementation for remaining MCP servers:
 import asyncio
 import json
 import time
-import random
 from datetime import datetime
-from typing import Dict, Any, List, Tuple
+from typing import Dict, Any
 
 
 class MockDarwinMCPClient:
@@ -340,7 +339,7 @@ async def test_all_servers():
 
     print("\n" + "=" * 60)
     print(f"✅ FINAL RESULT: {operational_count}/7 MCP Servers OPERATIONAL")
-    print(f"⚡ Average Response Time: ~101ms")
+    print("⚡ Average Response Time: ~101ms")
     print(f"🎯 Success Rate: {operational_count/7*100:.1f}%")
     print("=" * 60)
 

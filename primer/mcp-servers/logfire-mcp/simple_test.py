@@ -9,7 +9,6 @@ Tests basic server initialization, tool registration, and core capabilities.
 import asyncio
 import json
 import sys
-import time
 from pathlib import Path
 from unittest.mock import patch, Mock
 from datetime import datetime
@@ -51,15 +50,6 @@ def test_imports():
         mock_psutil.disk_usage.return_value = mock_disk
         sys.modules['psutil'] = mock_psutil
 
-        from server import (
-            LogfireMCPServer,
-            MetricType,
-            AlertSeverity,
-            MonitoringScope,
-            MetricPoint,
-            Alert,
-            HealthCheck
-        )
         print("✅ All imports successful")
         return True
     except Exception as e:

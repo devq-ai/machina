@@ -5,12 +5,10 @@ Tests real implementations with actual service connections
 """
 
 import asyncio
-import json
 import os
 import sys
 import time
 from datetime import datetime
-from typing import Dict, Any, List, Optional
 from pathlib import Path
 
 # Add MCP implementations to path
@@ -76,7 +74,7 @@ class ProductionMCPTester:
             # Test 2: Evaluate fitness
             print("\n🎯 Evaluating fitness...")
             ga.evaluate_fitness(population.id, "sphere")
-            print(f"✅ Fitness evaluated")
+            print("✅ Fitness evaluated")
             print(f"   Best fitness: {population.best_fitness:.4f}")
             print(f"   Average fitness: {population.average_fitness:.4f}")
 

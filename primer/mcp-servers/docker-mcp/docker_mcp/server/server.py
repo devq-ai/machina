@@ -6,8 +6,7 @@ and container orchestration through the Model Context Protocol.
 """
 
 import asyncio
-import json
-from typing import Any, List, Optional
+from typing import Any, List
 import mcp.types as types
 from mcp.server import Server
 import mcp.server.stdio

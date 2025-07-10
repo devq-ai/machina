@@ -253,7 +253,7 @@ class ComprehensiveMCPTester:
                         "file_path": str(server_path),
                         "framework_type": "structured"
                     })
-                    print(f"    ⚠️ No server files found")
+                    print("    ⚠️ No server files found")
             else:
                 print(f"    ❌ Directory not found: {server_dir}")
         
@@ -303,7 +303,7 @@ class ComprehensiveMCPTester:
                             "file_path": str(file_path),
                             "framework_type": "unknown"
                         })
-                        print(f"    ❌ No FastAPI app found")
+                        print("    ❌ No FastAPI app found")
                         
                 except Exception as e:
                     results.append({
@@ -365,7 +365,7 @@ class ComprehensiveMCPTester:
             "detailed_results": all_results
         }
         
-        print(f"\n📊 COMPREHENSIVE TEST RESULTS")
+        print("\n📊 COMPREHENSIVE TEST RESULTS")
         print("=" * 50)
         print(f"Total Servers Assessed: {total_servers}")
         print(f"✅ Successfully Tested: {tested_servers}")
@@ -391,7 +391,7 @@ async def main():
     print(f"\n📄 Comprehensive results saved to: {output_file}")
     
     # Generate summary by category
-    print(f"\n📋 RESULTS BY CATEGORY:")
+    print("\n📋 RESULTS BY CATEGORY:")
     print("-" * 30)
     
     for result in results['detailed_results']:

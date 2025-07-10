@@ -8,11 +8,10 @@ import os
 import json
 import asyncio
 import logging
-from typing import Any, Dict, List, Optional, Union
-from datetime import datetime, timezone, timedelta
+from typing import Any, Dict, List, Optional
+from datetime import datetime, timezone
 from dataclasses import dataclass
 from enum import Enum
-import base64
 
 try:
     import httpx
@@ -22,7 +21,6 @@ except ImportError:
     import subprocess
     subprocess.check_call(["pip", "install", "httpx", "pydantic"])
     import httpx
-    from pydantic import BaseModel, Field
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)

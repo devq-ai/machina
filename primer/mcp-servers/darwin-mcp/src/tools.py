@@ -6,7 +6,6 @@ from typing import Dict, Any, List
 import mcp.types as types
 from datetime import datetime
 from deap import base, creator, tools, algorithms
-import numpy as np
 import random
 
 def get_tools() -> List[types.Tool]:

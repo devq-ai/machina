@@ -6,9 +6,7 @@ Container Management and Orchestration via MCP
 
 import asyncio
 import json
-import os
-import sys
-from typing import Dict, Any, List, Optional, Union
+from typing import Dict, Any, List, Optional
 from datetime import datetime
 import mcp.types as types
 from mcp.server import Server, NotificationOptions

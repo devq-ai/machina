@@ -10,8 +10,6 @@ import asyncio
 import json
 import sys
 import subprocess
-import tempfile
-import os
 from pathlib import Path
 
 async def test_mcp_protocol():

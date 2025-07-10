@@ -15,10 +15,9 @@ import json
 import logging
 import uuid
 from datetime import datetime, timedelta
-from typing import Dict, List, Any, Optional, Union, Set
+from typing import Dict, List, Any, Optional
 from pathlib import Path
 import sys
-import os
 
 # Add the project root to Python path
 project_root = Path(__file__).parent.parent.parent.parent
@@ -683,7 +682,7 @@ class TaskMasterMCP:
                 new_dependencies = task.dependencies + [dependency_id]
                 await self.storage.update_task(task_id, {'dependencies': new_dependencies})
                 logger.info(f"Added dependency {dependency_id} to task {task_id}")
-                return {'success': True, 'message': f'Dependency added successfully'}
+                return {'success': True, 'message': 'Dependency added successfully'}
             else:
                 return {'success': False, 'error': 'Dependency already exists'}
 
@@ -702,7 +701,7 @@ class TaskMasterMCP:
                 new_dependencies = [d for d in task.dependencies if d != dependency_id]
                 await self.storage.update_task(task_id, {'dependencies': new_dependencies})
                 logger.info(f"Removed dependency {dependency_id} from task {task_id}")
-                return {'success': True, 'message': f'Dependency removed successfully'}
+                return {'success': True, 'message': 'Dependency removed successfully'}
             else:
                 return {'success': False, 'error': 'Dependency not found'}
 

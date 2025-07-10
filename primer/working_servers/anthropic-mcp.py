@@ -7,7 +7,7 @@ Real MCP protocol implementation with Anthropic API integration
 import json
 import os
 import sys
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List
 import asyncio
 import logging
 

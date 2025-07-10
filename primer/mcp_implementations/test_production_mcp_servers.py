@@ -6,20 +6,11 @@ Tests actual tool functionality with real implementations
 
 import asyncio
 import json
-import os
-import tempfile
-import shutil
-import sqlite3
-from pathlib import Path
-from unittest.mock import Mock, patch, MagicMock
-import pytest
-from typing import Dict, List, Any, Optional
+from unittest.mock import Mock, patch
+from typing import Dict, List, Any
 
 # MCP Testing Framework
-from mcp.server.models import Tool, TextContent, EmbeddedResource
-from mcp.server.session import ServerSession
-from mcp.server.stdio import StdioServerParameters
-from mcp.types import CallToolRequest, CallToolResult
+from mcp.types import CallToolRequest
 
 # Test Configuration
 TEST_RESULTS = []
@@ -739,7 +730,7 @@ async def run_all_production_tests():
     print("-" * 40)
     
     try:
-        print(f"\n📊 Testing Docker MCP...")
+        print("\n📊 Testing Docker MCP...")
         docker_tester = TestDockerMCP()
         docker_results = await docker_tester.run_docker_tests()
         all_results.extend(docker_results)
@@ -807,7 +798,7 @@ async def run_all_production_tests():
                 "note": "Server implementation is incomplete - only basic structure exists"
             }
             all_results.append(result)
-            print(f"   ⚠️  Server marked as incomplete")
+            print("   ⚠️  Server marked as incomplete")
             
         except Exception as e:
             print(f"   ❌ {server_name} test failed: {e}")
@@ -857,7 +848,7 @@ if __name__ == "__main__":
     summary = generate_test_summary(results)
     
     # Print final results
-    print(f"\n🎯 FINAL TEST RESULTS")
+    print("\n🎯 FINAL TEST RESULTS")
     print("=" * 60)
     print(f"Total Tests: {summary['total_tests']}")
     print(f"✅ Passed: {summary['passed_tests']}")
@@ -872,4 +863,4 @@ if __name__ == "__main__":
             "detailed_results": results
         }, f, indent=2)
     
-    print(f"\n📄 Detailed results saved to: mcp_production_test_results.json")
+    print("\n📄 Detailed results saved to: mcp_production_test_results.json")

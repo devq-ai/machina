@@ -6,9 +6,8 @@ and scheduling automation through the Model Context Protocol.
 """
 
 import asyncio
-import json
-from datetime import datetime, timedelta
-from typing import Any, List, Optional
+from datetime import datetime
+from typing import Any, List
 import mcp.types as types
 from mcp.server import Server
 import mcp.server.stdio
