@@ -1,1 +1,0 @@
-"""FastMCP MCP Server Package"""

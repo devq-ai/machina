@@ -1,1 +1,0 @@
-"""Docker MCP Server Package"""

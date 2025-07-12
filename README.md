@@ -299,6 +299,7 @@ The repository includes a complete CLI frontend implementation with beautiful te
 **Location**: `devgen/PRPs/templates/supporting_docs/cli_frontend/`
 
 **Features**:
+
 - 🎨 **Cyber & Pastel Themes** - Beautiful terminal UI with modern design
 - 📋 **Interactive Playbook Execution** - Visual workflow automation
 - 🏗️ **Project Management** - Complete project lifecycle tools
@@ -306,6 +307,7 @@ The repository includes a complete CLI frontend implementation with beautiful te
 - ⚙️ **Configuration Management** - Interactive configuration editing
 
 **Quick Start**:
+
 ```bash
 cd devgen/PRPs/templates/supporting_docs/cli_frontend
 chmod +x setup.sh
@@ -315,6 +317,45 @@ make build
 ```
 
 **Documentation**: [Complete User Guide](devgen/PRPs/templates/supporting_docs/cli_frontend/USER_GUIDE.md)
+
+### DevGen CLI Tool ✅ **WORKING**
+
+**Location**: `cli/`
+
+The DevGen CLI is a production-ready terminal application for managing MCP servers with beautiful Charm-based UI:
+
+**Features**:
+
+- 🔌 **MCP Server Management** - Start, stop, and toggle servers with simple commands
+- 📊 **Interactive Dashboard** - Real-time server monitoring with terminal UI
+- 🏥 **Health Monitoring** - Check server status and health across all registered servers
+- 🎨 **Cyberpunk UI** - Beautiful terminal interface with neon color scheme
+- 🔍 **Registry Integration** - Works seamlessly with the Machina MCP Registry
+
+**Installation**:
+
+```bash
+cd cli
+make build && make install
+```
+
+**Usage**:
+
+```bash
+# List all MCP servers
+devgen server list
+
+# Interactive dashboard
+devgen dashboard
+
+# Toggle server on/off
+devgen server toggle context7-mcp
+
+# Check server status
+devgen server status context7-mcp
+```
+
+**Documentation**: [CLI README](cli/README.md)
 
 ## 🔧 FastMCP Framework
 
@@ -569,7 +610,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 **Made with ❤️ by the DevQ.ai Team**
 
-*Empowering AI-driven development workflows with production-ready MCP servers*
+_Empowering AI-driven development workflows with production-ready MCP servers_
 
 [![DevQ.ai](https://img.shields.io/badge/DevQ.ai-Visit%20Website-00ffff?style=for-the-badge)](https://devq.ai/)
 
